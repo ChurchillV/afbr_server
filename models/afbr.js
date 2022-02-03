@@ -3,29 +3,7 @@
 // const DogSchema = new mongoose.Schema({
 //     name: {
 //         type: 'String',
-//         required: true,
-//     },
-//     breed: {
-//         type: 'String',
-//         required: false,
-//     },
-//     age: {
-//         type: 'Number',
-//         required: false,
-//     },
-//     sex: {
-//         type: 'String',
-//         required: true,
-//     },
-//     sire: {
-//         type: 'String',
-//         required: false,
-//     },
-//     dam: {
-//         type: 'String',
-//         required: false,
-//     },
-    
+
 // });
 
 // const Dogs = mongoose.model('afbr_dogs', DogSchema);
@@ -34,14 +12,6 @@
 
 // const dbConfig = require("../config/db");
 
-// const Sequelize = require("sequelize");
-// const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-//   host: dbConfig.HOST,
-//   dialect: dbConfig.dialect,
-//   operatorsAliases: false,
-
-//   pool: {
-//     max: dbConfig.pool.max,
 //     min: dbConfig.pool.min,
 //     acquire: dbConfig.pool.acquire,
 //     idle: dbConfig.pool.idle

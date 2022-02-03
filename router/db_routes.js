@@ -17,7 +17,7 @@ router.get('/createdb', (req, res) => {
 });
 
 router.get('/createdog', (req, res) =>{
-    let sql = 'CREATE TABLE dog(id int AUTO_INCREMENT, name VARCHAR(255), age int, breed VARCHAR(255), sire int,dam int,sex VARCHAR(255), date_of_birth VARCHAR(255), PRIMARY KEY(id) )';
+    let sql = 'CREATE TABLE dog(id int AUTO_INCREMENT, name VARCHAR(255), image_url VARCHAR(255),age int, breed VARCHAR(255), sire int,dam int,sex VARCHAR(255), date_of_birth VARCHAR(255),  public_id VARCHAR(255), PRIMARY KEY(id) )';
     db.query(sql, err => {
         if (err){
         throw err
@@ -39,8 +39,19 @@ router.get('/dog', (req, res) => {
 })
 
 router.get('/alter', (req, res) => {
-    VA = 'sex'
-    let sql = `ALTER TABLE dog ADD COLUMN ${VA} VARCHAR(255)`;
+    VA = 'user'
+    let sql = `ALTER TABLE dog ADD COLUMN ${VA} int`;
+    let query = db.query(sql, err => {
+        if (err){
+            throw err;
+        }
+        res.send(`dog alfteed ${VA}`)
+    })
+})
+
+router.get('/useralter', (req, res) => {
+    VA = 'uid'
+    let sql = `ALTER TABLE users ADD COLUMN ${VA} VARCHAR(255)`;
     let query = db.query(sql, err => {
         if (err){
             throw err;
@@ -59,6 +70,7 @@ router.get('/foreign1', (req, res) => {
         res.send('dog foreign')
     })
 })
+
 router.get('/foreign2', (req, res) => {
     
     let sql = 'ALTER TABLE dog ADD FOREIGN KEY (dam) REFERENCES dog(id) ON DELETE SET NULL ON UPDATE SET NULL';
@@ -70,6 +82,16 @@ router.get('/foreign2', (req, res) => {
     })
 })
 
+router.get('/userforeign1', (req, res) => {
+    
+    let sql = 'ALTER TABLE dog ADD FOREIGN KEY (user) REFERENCES users(id) ON DELETE SET NULL ON UPDATE SET NULL';
+    let query = db.query(sql, err => {
+        if (err){
+            throw err;
+        }
+        res.send('dog and user altered')
+    })
+})
 router.get('/select', (req, res) => {
     
     let sql = 'SELECT * FROM dog';

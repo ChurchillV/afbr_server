@@ -1,14 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllDogs, postCreateDog, getOneDog, deleteDog, putUpdateDog, getAllSires,getAllDams, getPedigree, return_dog_id } = require('../controllers/afbr')
+const { getAllDogs, postCreateDog, 
+    getOneDog, deleteDog, putUpdateDog, 
+    getAllDogsByUser,
+    getAllSires,getAllDams, getPedigree, return_dog_id, postAddDogImage } = require('../controllers/afbr')
 router.get("/", getAllDogs)
+
+router.get("/getdoguser/:id", getAllDogsByUser)
+
 
 router.get("/sires", getAllSires)
 
 router.get("/dams", getAllDams)
 
 router.post('/', postCreateDog)
+
+router.post('/addImage/:dog_name', postAddDogImage)
 
 router.get('/:id', getOneDog)
 

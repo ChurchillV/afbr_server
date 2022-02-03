@@ -18,6 +18,48 @@ exports.getAllDogs = (req, res) => {
     })
 };
 
+
+exports.getAllDogsByUser = (req, res) => {
+    console.log(req.params.id)
+    id = Number(req.params.id)
+    let sql = 'SELECT * FROM dog WHERE user = ?';
+    let query = db.query(sql, id,(err, result, fields) => {
+        if (err){
+            throw err;
+        }
+        res.send(result)
+    })
+};
+exports.postAddDogImage = (req, res) => {
+    console.log('here',req.body)
+    console.log('request obdy', req.body)
+    let new_field = ''
+    let field = Object.keys(req.body)
+    console.log('field',field.toString())
+    let value = Object.values(req.body)
+    console.log('value',value)
+    for (let i = 0; i < value.length; i ++){
+        new_field += "'"
+        new_field += value[i]
+        new_field += "'"
+        if ( i < value.length - 1){
+            new_field += ','
+        }           
+        
+        
+    }
+    
+
+    console.log('newfield', new_field)
+    let sql = `INSERT INTO dog (${field}) VALUES (${new_field})`;
+    let query = db.query(sql, value, (err, result, fields) => {
+        if (err){
+            throw err;
+        }
+        res.send(result)
+    })
+}
+
 exports.postCreateDog = (req, res) => {
     console.log('here',req.body)
     console.log('request obdy', req.body)

@@ -3,40 +3,21 @@
 // const db = process.env.MONGO_URI;
 
 // const connectDB = async() => {
-//     try{
-//         await mongoose.connect(db, {
-//             useNewUrlParser: true,
-//             useUnifiedTopology: true,
-//         });
 
-//         console.log('Mongo Db is connected')
- 
-//     } catch (err) {
-//         console.error(err.message)
-//         process.exit(1)
-//     }
-// };
-
-// module.exports = connectDB;
-// module.exports = {
-//     HOST: "localhost",
-//     USER: "root",
-//     PASSWORD: "123456",
-//     DB: "testdb",
-//     dialect: "mysql",
-//     pool: {
-//       max: 5,
-//       min: 0,
 //       acquire: 30000,
 //       idle: 10000
 //     }
 //   };
 const mysql = require('mysql')
 const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '',
-    database: 'afbr'
+    // host: '127.0.0.1',
+    // user: 'root',
+    // password: '',
+    // database: 'afbr'
+    host: "z3iruaadbwo0iyfp.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    user: "ks8pa75ol3h0skzv",
+    password:"el5w7f3rjcbisebg",
+    database: "el5w7f3rjcbisebg"
 })
 
 

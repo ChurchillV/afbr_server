@@ -39,7 +39,7 @@ app.use('/api/users', user_routes)
 
 
 
-const PORT = process.env.PORT || 46360;
+const PORT = process.env.PORT || 8000;
 
 app.get('/', (req, res) => res.send('Server up and running'));
 

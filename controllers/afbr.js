@@ -379,3 +379,17 @@ exports.getAllDams = (req, res) => {
         console.log('search results for all females dams')
     })
 };
+
+exports.getSearch = (req, res) => {
+
+    search_input =req.params.search_input
+    let sql = `SELECT id, name FROM dog WHERE name='${search_input}' OR name='${search_input}'`;
+    let query = db.query(sql, (err, result, fields) => {
+        if (err){
+            throw err;
+        }
+        res.send(result)
+        console.log('search results for', req.params.id)
+    })
+};
+

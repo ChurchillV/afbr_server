@@ -4,7 +4,8 @@ const router = express.Router();
 const { getAllDogs, postCreateDog, 
     getOneDog, deleteDog, putUpdateDog, 
     getAllDogsByUser,
-    getAllSires,getAllDams, getPedigree, return_dog_id, postAddDogImage } = require('../controllers/afbr')
+    getAllSires,getAllDams, getPedigree, 
+    getSearch, return_dog_id, postAddDogImage } = require('../controllers/afbr')
 router.get("/", getAllDogs)
 
 router.get("/getdoguser/:id", getAllDogsByUser)
@@ -21,6 +22,8 @@ router.post('/addImage/:dog_name', postAddDogImage)
 router.get('/:id', getOneDog)
 
 router.get('/getbyname/:dog_name', return_dog_id)
+
+router.get('/search/:search_input', getSearch)
 
 router.get('/pedigree/:id', getPedigree)
 

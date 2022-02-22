@@ -58,15 +58,20 @@ exports.postAddDogImage = (req, res) => {
         }
         res.send(result)
     })
+
+    
+   
+
 }
 
 exports.postCreateDog = (req, res) => {
-    console.log('here',req.body)
-    console.log('request obdy', req.body)
+    console.log('here',req.body.dog)
+    console.log('request obdy', req.body.dog)
     let new_field = ''
-    let field = Object.keys(req.body)
+    var users_id = ''
+    let field = Object.keys(req.body.dog)
     console.log('field',field.toString())
-    let value = Object.values(req.body)
+    let value = Object.values(req.body.dog)
     console.log('value',value)
     for (let i = 0; i < value.length; i ++){
         new_field += "'"
@@ -87,7 +92,41 @@ exports.postCreateDog = (req, res) => {
             throw err;
         }
         res.send(result)
+        console.log(query.sql)
+
     })
+
+    //get user id from uid
+
+    uid = req.body.user.uid
+    let sql2 = 'SELECT * FROM users WHERE uid = ?';
+    let query2 = db.query(sql2, uid, (err, result, fields) => {
+
+
+        if (err){
+            throw err;
+        }
+        console.log(query2.sql)
+        console.log(result)
+        users_id = result[0].id
+        console.log('users_id---------',users_id)
+
+        let sql3 = `UPDATE dog  SET user=? WHERE name='${req.body.dog.name}' `;
+        console.log('users id again,',users_id)
+    
+        let query3 = db.query(sql3, users_id, (err, result, fields) => {
+            if (err){
+                throw err;
+            }
+           
+            console.log('succeess eiditetd')
+            console.log(query3.sql)
+            console.log(users_id)
+        })
+    })
+
+  
+
 };
 
 exports.getOneDog = (req, res) => {

@@ -12,6 +12,7 @@ exports.postSendRegisterEmail = (req, res) => {
     console.log(req.body)
     var mailOptions = {
         from: 'yotuo2003@gmail.com',
+        
         to: req.body.email,
         subject: 'Message from the African Bully Registry',
         html: '<h1>Welcome to the African Bully Registry <br>' + 

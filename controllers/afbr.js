@@ -22,7 +22,7 @@ exports.getAllDogs = (req, res) => {
 exports.getAllDogsByUser = (req, res) => {
     console.log(req.params.id)
     id = Number(req.params.id)
-    let sql = 'SELECT * FROM dog WHERE user = ?';
+    let sql = 'SELECT * FROM dog WHERE user = ?  ORDER BY name';
     let query = db.query(sql, id,(err, result, fields) => {
         if (err){
             throw err;
@@ -396,7 +396,7 @@ exports.deleteDog = (req, res) => {
 exports.getAllSires = (req, res) => {
 
     
-    let sql = "SELECT id,name FROM dog WHERE sex='male'";
+    let sql = "SELECT id,name FROM dog WHERE sex='male' ORDER BY name";
     let query = db.query(sql, (err, result, fields) => {
         if (err){
             throw err;
@@ -409,7 +409,7 @@ exports.getAllSires = (req, res) => {
 exports.getAllDams = (req, res) => {
 
     
-    let sql = "SELECT id, name FROM dog WHERE sex='female'";
+    let sql = "SELECT id, name FROM dog WHERE sex='female'  ORDER BY name";
     let query = db.query(sql, (err, result, fields) => {
         if (err){
             throw err;

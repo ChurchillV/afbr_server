@@ -421,14 +421,15 @@ exports.getAllDams = (req, res) => {
 
 exports.getSearch = (req, res) => {
 
-    search_input =req.params.search_input
-    let sql = `SELECT id, name FROM dog WHERE name='${search_input}' OR name='${search_input}'`;
+    search_input = req.params.search_input
+    let sql = `SELECT id, name FROM dog WHERE name LIKE '%${search_input}%' OR afbr_no='${search_input}' ORDER BY name`;
     let query = db.query(sql, (err, result, fields) => {
         if (err){
             throw err;
         }
+        console.log(query.sql)
         res.send(result)
-        console.log('search results for', req.params.id)
+        console.log('search results for', result[0])
     })
 };
 

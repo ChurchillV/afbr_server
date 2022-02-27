@@ -5,7 +5,6 @@ const db = require('../config/db')
 
 
 
-
 exports.getAllDogs = (req, res) => {
 
     
@@ -39,9 +38,9 @@ exports.postAddDogImage = (req, res) => {
     let value = Object.values(req.body)
     console.log('value',value)
     for (let i = 0; i < value.length; i ++){
-        new_field += "'"
+        new_field += "\""
         new_field += value[i]
-        new_field += "'"
+        new_field += "\""
         if ( i < value.length - 1){
             new_field += ','
         }           
@@ -421,15 +420,104 @@ exports.getAllDams = (req, res) => {
 
 exports.getSearch = (req, res) => {
 
+
     search_input = req.params.search_input
-    let sql = `SELECT id, name FROM dog WHERE name LIKE '%${search_input}%' OR afbr_no='${search_input}' ORDER BY name`;
-    let query = db.query(sql, (err, result, fields) => {
-        if (err){
-            throw err;
-        }
-        console.log(query.sql)
-        res.send(result)
-        console.log('search results for', result[0])
-    })
+ 
+
+   
+        let sql = `SELECT id, name FROM dog WHERE name LIKE "%${search_input}%" OR afbr_no="${search_input}" ORDER BY name`;
+        let query = db.query(sql, (err, result, fields) => {
+            if (err){
+                throw err;
+            }
+            console.log(query.sql)
+            res.send(result)
+            console.log('search results for', result[0])
+        })
+    
+   
+   
+      
+
+   
 };
 
+exports.image_to_text = (req, res) => {
+    var axios = require("axios").default;
+
+    var options = {
+        method: 'GET',
+        url: 'https://ocrly-image-to-text.p.rapidapi.com/',
+        params: {
+        //   imageurl: req.body.filename,
+            imageurl: 'https://res.cloudinary.com/daurieb51/image/upload/v1645796241/IMG-20220223-WA0021_btcmqz.jpg',
+          filename: 'sample.jpg'
+        },
+        headers: {
+          'x-rapidapi-host': 'ocrly-image-to-text.p.rapidapi.com',
+          'x-rapidapi-key': '01e6417bc4msh36b1ce844f92736p1dfdc9jsnde9c6aefbc36'
+        }
+      };
+      
+      axios.request(options).then(function (response) {
+        //   console.log(response.data);
+          res.send(response.data)
+          restructureData(response.data)
+      }).catch(function (error) {
+          console.error(error);
+      });
+
+    restructureData = (data)=>{
+        let one = {
+
+        };
+        let two = {
+
+        };
+        let three = {
+
+        };
+        let four = {};
+        let five = {};
+
+        let six = {};
+        let seven = {};
+        let eight = {}
+        let nine = {}
+        let ten = {}
+        let eleven = {}
+        let twelve = {}
+        let thirteen = {}
+        let fourteen = {}
+        let fifteen = {}
+
+        let replacements = [
+         'BULLY','PEDEX', 'Genealogy', 'Registered Sire:',
+        'Registered Dam:', 'Current Owner', 'Date of Birth:',
+        'Land of Birth',
+        'View offspring', 'View Siblings:',
+        'Select Below',
+        'Physical Attributes<br />',
+        'Gender:',
+        'View Breedings:',]
+        console.log('data is of type',typeof(data))
+        split_data = data.split('\n')
+        
+        for (var i = 0; i < split_data.length; i++){
+            for (var j = 0; j < replacements.length; j++){
+                if( split_data[i] == replacements[j]){
+                    console.log(true)
+                    console.log('found', j)
+                    console.log('cutting', i)
+
+                    split_data.splice(i, 1)
+                }
+    
+            }
+           
+
+        }
+        console.log(split_data.join())
+        
+    }
+}

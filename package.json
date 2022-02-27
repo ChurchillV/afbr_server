@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/vision": "^2.4.2",
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -21,6 +22,7 @@
     "mongoose": "^6.1.1",
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
+    "mysql-apostrophe": "^1.0.8",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.2",
     "sequelize": "^6.12.0-beta.3"

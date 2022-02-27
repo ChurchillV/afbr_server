@@ -5,7 +5,7 @@ const { getAllDogs, postCreateDog,
     getOneDog, deleteDog, putUpdateDog, 
     getAllDogsByUser,
     getAllSires,getAllDams, getPedigree, 
-    getSearch, return_dog_id, postAddDogImage } = require('../controllers/afbr')
+    getSearch, return_dog_id, postAddDogImage, image_to_text } = require('../controllers/afbr')
 router.get("/", getAllDogs)
 
 router.get("/getdoguser/:id", getAllDogsByUser)
@@ -30,6 +30,9 @@ router.get('/pedigree/:id', getPedigree)
 router.put('/:id', putUpdateDog);
 
 router.delete('/:id', deleteDog)
+
+
+router.post('/image_to_text', image_to_text)
 
 
 module.exports = router;

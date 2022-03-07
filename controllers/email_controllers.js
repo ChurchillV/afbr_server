@@ -36,6 +36,7 @@ exports.postSendRegisterEmail = (req, res) => {
           console.log(error);
       } else {
           console.log('Email was sent successfully: ' + info.response);
+          
       }
     });
     
@@ -68,6 +69,7 @@ exports.postSendRegisterDogEmail = (req, res) => {
           console.log(error);
       } else {
           console.log('Email was sent successfully: ' + info.response);
+          res.send('email sent')
       }
     });
     

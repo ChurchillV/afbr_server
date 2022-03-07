@@ -57,51 +57,16 @@ app.use('/api/email', email_routes)
 const PORT = process.env.PORT || 8000;
 
 app.get('/', (req, res) => res.send('Server up and running'));
-
-// db.connect(err => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log("Mysql connected")
-// }
-
-// );
-
-// var axios = require("axios").default;
+var nodemailer = require('nodemailer');
+var sgTransport = require('nodemailer-sendgrid-transport');
 
 // var options = {
-//   method: 'GET',
-//   params: {
-//     imageurl: 'https://res.cloudinary.com/daurieb51/image/upload/v1645745790/ped1_ujmspr.jpg',
-//     filename: 'sample.jpg'
-//   },
-//   headers: {
-//     'x-rapidapi-host': 'ocrly-image-to-text.p.rapidapi.com',
-//     'x-rapidapi-key': '01e6417bc4msh36b1ce844f92736p1dfdc9jsnde9c6aefbc36'
+//   auth: {
+//     api_user: 'apikey',
+//     api_key: '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'
 //   }
-// };
+// }
 
-// axios.request(options).then(function (response) {
-// 	console.log(response.data);
-// }).catch(function (error) {
-// 	console.error(error);
-// });
-// const formData = new FormData();
-// formData.append('image', $('https://res.cloudinary.com/daurieb51/image/upload/v1645745790/ped1_ujmspr.jpg')[0].files[0]);
-// $.ajax({
-//     method: 'POST',
-//     url: 'https://api.api-ninjas.com/v1/imagetotext',
-//     data: formData,
-//     enctype: 'multipart/form-data',
-//     processData: false,
-//     contentType: false, 
-//     success: function(result) {
-//         console.log(result);
-//     },
-//     error: function ajaxError(jqXHR, textStatus, errorThrown) {
-//         alert(jqXHR.responseText);
-//     }
-// });
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`)

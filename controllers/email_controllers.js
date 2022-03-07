@@ -11,7 +11,7 @@ var nodemailer = require('nodemailer')
 exports.postSendRegisterEmail = (req, res) => {
     console.log(req.body)
     var mailOptions = {
-        from: 'yotuo2003@gmail.com',
+        from: 'africanbullyregistry@gmail.com',
         
         to: req.body.email,
         subject: 'Message from the African Bully Registry',
@@ -26,8 +26,8 @@ exports.postSendRegisterEmail = (req, res) => {
         secure: false,
         requireTLS: true,
         auth: {
-            user: 'yotuo2003@gmail.com', // enter your email address
-            pass: 'incorrect12345$$'  // enter your visible/encripted password
+            user: 'africanbullyregistry@gmail.com', // enter your email address
+            pass: 'afbr2020'  // enter your visible/encripted password
         }
     });
     
@@ -44,7 +44,7 @@ exports.postSendRegisterEmail = (req, res) => {
 exports.postSendRegisterDogEmail = (req, res) => {
     console.log(req.body)
     var mailOptions = {
-        from: 'yotuo2003@gmail.com',
+        from: 'africanbullyregistry@gmail.com',
         to: req.body.user.email,
         subject: 'Message from the African Bully Registry',
         html: `<h1>${req.body.user.displayName}, your new dog ${req.body.dog.name} <br>` 
@@ -58,8 +58,8 @@ exports.postSendRegisterDogEmail = (req, res) => {
         secure: false,
         requireTLS: true,
         auth: {
-            user: 'yotuo2003@gmail.com', // enter your email address
-            pass: 'incorrect12345$$'  // enter your visible/encripted password
+            user: 'africanbullyregistry@gmail.com', // enter your email address
+            pass: 'afbr2020$$'  // enter your visible/encripted password
         }
     });
     
@@ -83,6 +83,35 @@ exports.return_dog_id = (req, res) =>{
         }
         res.send(result)
     })
+}
+exports.trial = (req, res) => {
+    var client = nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: 'apikey',
+          pass: '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'
+        }
+      });
+    
+    // var client = nodemailer.createTransport(sgTransport(options));
+    
+    var email = {
+      from: 'africanbullyregistry@gmail.com',
+      to: 'yotuo2003@gmail.com',
+      subject: 'Hello',
+      text: 'Hello world',
+      html: '<b>Hello world</b>'
+      
+    };
+    
+    client.sendMail(email, function(err, info){
+        if (err ){
+          console.log(err);
+        }
+        else {
+          console.log('Message sent: ' + info.response);
+        }
+    });
 }
 
 exports.getPedigree = (req, res) => {

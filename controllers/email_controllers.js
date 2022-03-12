@@ -3,95 +3,20 @@
 const Dogs = require('../models/afbr');
 const db = require('../config/db')
 var nodemailer = require('nodemailer')
-
+const dotenv = require('dotenv')
+dotenv.config()
 
 
 
 
 exports.postSendRegisterEmail = (req, res) => {
-    console.log(req.body)
-    var mailOptions = {
-        from: 'africanbullyregistry@gmail.com',
-        
-        to: req.body.email,
-        subject: 'Message from the African Bully Registry',
-        html: '<h1>Welcome to the African Bully Registry <br>' + 
-             `</h1> Thank you ${req.body.username} for registering with us` + 
-             `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1643934254/bqkxer8jrpi4zmnitk1a.jpg'>`
-    };
-    
-    var transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: {
-            user: 'africanbullyregistry@gmail.com', // enter your email address
-            pass: 'afbr2020'  // enter your visible/encripted password
-        }
-    });
-    
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-          console.log(error);
-      } else {
-          console.log('Email was sent successfully: ' + info.response);
-          
-      }
-    });
-    
-};
+    var sgTransport = require('nodemailer-sendgrid-transport');
 
-exports.postSendRegisterDogEmail = (req, res) => {
-    console.log(req.body)
-    var mailOptions = {
-        from: 'africanbullyregistry@gmail.com',
-        to: req.body.user.email,
-        subject: 'Message from the African Bully Registry',
-        html: `<h1>${req.body.user.displayName}, your new dog ${req.body.dog.name} <br>` 
-            + ' has been successfully registered with us' + 
-             `</h1> Thank you ${req.body.user.displayName} for registering with us`
-    };
-    
-    var transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: {
-            user: 'africanbullyregistry@gmail.com', // enter your email address
-            pass: 'afbr2020$$'  // enter your visible/encripted password
-        }
-    });
-    
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-          console.log(error);
-      } else {
-          console.log('Email was sent successfully: ' + info.response);
-          res.send('email sent')
-      }
-    });
-    
-};
-
-exports.return_dog_id = (req, res) =>{
-    console.log('req.params.name, ',req.params.dog_name)
-    let dog_name = req.params.dog_name
-    let sql = 'SELECT id FROM dog WHERE name = ?';
-    let query = db.query(sql, dog_name, (err, result, fields) => {
-        if (err){
-            throw err;
-        }
-        res.send(result)
-    })
-}
-exports.trial = (req, res) => {
     var client = nodemailer.createTransport({
         service: 'SendGrid',
         auth: {
           user: 'apikey',
-          pass: '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'
+          pass: PROCESS.ENV.pass
         }
       });
     
@@ -101,7 +26,7 @@ exports.trial = (req, res) => {
       from: 'africanbullyregistry@gmail.com',
       to: 'yotuo2003@gmail.com',
       subject: 'Hello',
-      text: 'Hello world',
+      text: 'Hello send grif is the best',
       html: '<b>Hello world</b>'
       
     };
@@ -112,6 +37,74 @@ exports.trial = (req, res) => {
         }
         else {
           console.log('Message sent: ' + info.response);
+          res.send('email sent')
+        }
+    });
+    
+};
+
+exports.postSendRegisterDogEmail = (req, res) => {
+    var sgTransport = require('nodemailer-sendgrid-transport');
+
+    var client = nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: 'apikey',
+          pass: process.env.pass
+        }
+      });
+    
+    // var client = nodemailer.createTransport(sgTransport(options));
+    
+    var email = {
+      from: 'africanbullyregistry@gmail.com',
+      to: 'yotuo2003@gmail.com',
+      subject: 'Hello',
+      text: 'Hello send grif is the best',
+      html: '<b>Hello world</b>'
+      
+    };
+    
+    client.sendMail(email, function(err, info){
+        if (err ){
+          console.log(err);
+        }
+        else {
+          console.log('Message sent: ' + info.response);
+          res.send('email sent')
+        }
+    });
+};
+
+exports.trial = (req, res) => {
+    var sgTransport = require('nodemailer-sendgrid-transport');
+
+    var client = nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: 'apikey',
+          pass: PROCESS.ENV.pass
+        }
+      });
+    
+    // var client = nodemailer.createTransport(sgTransport(options));
+    
+    var email = {
+      from: 'africanbullyregistry@gmail.com',
+      to: 'yotuo2003@gmail.com',
+      subject: 'Hello',
+      text: 'Hello send grif is the best',
+      html: '<b>Hello world</b>'
+      
+    };
+    
+    client.sendMail(email, function(err, info){
+        if (err ){
+          console.log(err);
+        }
+        else {
+          console.log('Message sent: ' + info.response);
+          res.send('email sent')
         }
     });
 }
@@ -308,90 +301,4 @@ exports.getPedigree = (req, res) => {
 }
 
 
-
-exports.putUpdateDog = (req, res) => {
-    console.log('here',req.body)
-    console.log('request body', req.body)
-    console.log('request to put',req.body, 'in', req.params.id)
-    let new_field = ''
-    let field = Object.keys(req.body)
-    console.log('field',field.toString())
-    let value = Object.values(req.body)
-    console.log('value',value)
-    for (let i = 0; i < value.length; i ++){
-        new_field += "'"
-        new_field += value[i]
-        new_field += "'"
-        if ( i < value.length - 1){
-            new_field += ','
-        }           
-        
-        
-    }
-    
-
-    console.log('newfield', new_field)
-    let sql = `UPDATE dog  SET ? WHERE id=${req.params.id}`;
-    let query = db.query(sql,req.body, (err, result, fields) => {
-        if (err){
-            throw err;
-        }
-        res.send(result)
-        console.log('succeess eiditetd')
-        console.log(query.sql)
-    })
-};
-
-exports.deleteDog = (req, res) => {
-    
-
- 
-    let sql = `DELETE FROM dog WHERE id=${req.params.id}`;
-    let query = db.query(sql,req.body, (err, result, fields) => {
-        if (err){
-            throw err;
-        }
-        res.send(result)
-        console.log('sucessful delete')
-    })
-};
-
-exports.getAllSires = (req, res) => {
-
-    
-    let sql = "SELECT id,name FROM dog WHERE sex='male'";
-    let query = db.query(sql, (err, result, fields) => {
-        if (err){
-            throw err;
-        }
-        res.send(result)
-        console.log('search results for all sires')
-    })
-};
-
-exports.getAllDams = (req, res) => {
-
-    
-    let sql = "SELECT id, name FROM dog WHERE sex='female'";
-    let query = db.query(sql, (err, result, fields) => {
-        if (err){
-            throw err;
-        }
-        res.send(result)
-        console.log('search results for all females dams')
-    })
-};
-
-exports.getSearch = (req, res) => {
-
-    search_input =req.params.search_input
-    let sql = `SELECT id, name FROM dog WHERE name='${search_input}' OR name='${search_input}'`;
-    let query = db.query(sql, (err, result, fields) => {
-        if (err){
-            throw err;
-        }
-        res.send(result)
-        console.log('search results for', req.params.id)
-    })
-};
 

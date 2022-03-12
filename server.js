@@ -57,16 +57,35 @@ app.use('/api/email', email_routes)
 const PORT = process.env.PORT || 8000;
 
 app.get('/', (req, res) => res.send('Server up and running'));
-var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
 
-// var options = {
-//   auth: {
-//     api_user: 'apikey',
-//     api_key: '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'
-//   }
-// }
 
+// var client = nodemailer.createTransport({
+//     service: 'SendGrid',
+//     auth: {
+//       user: 'apikey',
+// }
+//   });
+
+// // var client = nodemailer.createTransport(sgTransport(options));
+
+// var email = {
+//   from: 'africanbullyregistry@gmail.com',
+//   to: 'yotuo2003@gmail.com',
+//   subject: 'Hello',
+//   text: 'Hello world',
+//   html: '<b>Hello world</b>'
+  
+// };
+
+// client.sendMail(email, function(err, info){
+//     if (err ){
+//       console.log(err);
+//     }
+//     else {
+//       console.log('Message sent: ' + info.response);
+//     }
+// });
 
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`)

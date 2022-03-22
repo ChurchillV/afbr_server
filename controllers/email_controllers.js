@@ -25,9 +25,9 @@ exports.postSendRegisterEmail = (req, res) => {
     var email = {
       from: 'africanbullyregistry@gmail.com',
       to: 'yotuo2003@gmail.com',
-      subject: 'Hello',
-      text: 'Hello send grif is the best',
-      html: '<b>Hello world</b>'
+      subject: 'Thank you for registering with the African Bully Registry',
+      text: 'Welcome to the Commut=nity',
+      html: '<b>TThe AFBR</b>'
       
     };
     
@@ -59,9 +59,9 @@ exports.postSendRegisterDogEmail = (req, res) => {
     var email = {
       from: 'africanbullyregistry@gmail.com',
       to: 'yotuo2003@gmail.com',
-      subject: 'Hello',
-      text: 'Hello send grif is the best',
-      html: '<b>Hello world</b>'
+      subject: 'Dog registered',
+      text: 'Dear, your dog has been registered',
+      html: 'Welcome to the community'
       
     };
     

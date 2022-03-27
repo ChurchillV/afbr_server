@@ -49,6 +49,9 @@ exports.postCreateUser = (req, res) => {
     })
 };
 
+
+
+
 exports.getOneUser = (req, res) => {
     console.log(req.params.id)
     let id = req.params.id
@@ -88,7 +91,7 @@ exports.getUserByUid  = (req, res) => {
 exports.putUpdateUser = (req, res) => {
     console.log('here',req.body)
     console.log('request body', req.body)
-    console.log('request to put',req.body, 'in', req.params.id)
+    console.log('request to put',req.body, 'in', req.params.uid)
     let new_field = ''
     let field = Object.keys(req.body)
     console.log('field',field.toString())
@@ -107,7 +110,7 @@ exports.putUpdateUser = (req, res) => {
     
 
     console.log('newfield', new_field)
-    let sql = `UPDATE dog  SET ? WHERE id=${req.params.id}`;
+    let sql = `UPDATE users  SET ? WHERE uid='${req.params.uid}'`;
     let query = db.query(sql,req.body, (err, result, fields) => {
         if (err){
             throw err;

@@ -3,10 +3,11 @@ const router = express.Router();
 const db = require('../config/db')
 bcrypt = require('bcryptjs')
 
-const { postCreateUser, getAllUsers, getOneUser, getOneUserByEmailAndName, getUserByUid } = require('../controllers/users')
+const { postCreateUser, getAllUsers, getOneUser,
+     getOneUserByEmailAndName, getUserByUid, putUpdateUser } = require('../controllers/users')
 
 
-    
+router.post('/edit/:uid', putUpdateUser)
 
 router.post('/', postCreateUser)
 

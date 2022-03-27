@@ -390,6 +390,7 @@ exports.deleteDog = (req, res) => {
             throw err;
         }
         res.send(result)
+        console.log(query.sql)
         console.log('sucessful delete')
     })
 };

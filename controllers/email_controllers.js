@@ -50,7 +50,7 @@ exports.postSendRegisterDogEmail = (req, res) => {
         service: 'SendGrid',
         auth: {
           user: 'apikey',
-          pass: process.env.pass
+          pass: PROCESS.ENV.pass
         }
       });
     

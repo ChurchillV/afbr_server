@@ -16,7 +16,7 @@ exports.postSendRegisterEmail = (req, res) => {
         service: 'SendGrid',
         auth: {
           user: 'apikey',
-          pass: PROCESS.ENV.pass
+          pass: process.env.pass
         }
       });
     
@@ -50,7 +50,7 @@ exports.postSendRegisterDogEmail = (req, res) => {
         service: 'SendGrid',
         auth: {
           user: 'apikey',
-          pass: PROCESS.ENV.pass
+          pass: process.env.pass
         }
       });
     
@@ -83,7 +83,7 @@ exports.trial = (req, res) => {
         service: 'SendGrid',
         auth: {
           user: 'apikey',
-          pass: PROCESS.ENV.pass
+          pass: process.env.pass
         }
       });
     

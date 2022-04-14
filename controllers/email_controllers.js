@@ -56,24 +56,63 @@ exports.postSendRegisterDogEmail = (req, res) => {
     
     // var client = nodemailer.createTransport(sgTransport(options));
     
-    var email = {
+    var email1 = {
       from: 'africanbullyregistry@gmail.com',
-      to: 'yotuo2003@gmail.com',
+      to: req.body.user.email,
       subject: 'Dog registered',
       text: 'Dear, your dog has been registered',
-      html: 'Welcome to the community'
+      html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
       
-    };
+    }
+
+    var email2 = {
+        from: 'africanbullyregistry@gmail.com',
+        to: 'yotuo2003@gmail.com',
+        subject: 'Dog registered',
+        text: 'Dear, your dog has been registered',
+        html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
+        
+      }
+
+    var email3 = {
+        from: 'africanbullyregistry@gmail.com',
+        to: 'africanbullyregistry@gmail.com',
+        subject: 'Dog registered',
+        text: 'Dear, your dog has been registered',
+        html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
+        
+      }
+
+    var email4 = {
+        from: 'africanbullyregistry@gmail.com',
+        to: 'takyiotuo.to@gmail.com',
+        subject: 'Dog registered',
+        text: 'Dear, your dog has been registered',
+        html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
+        
+      }
     
-    client.sendMail(email, function(err, info){
-        if (err ){
-          console.log(err);
-        }
-        else {
-          console.log('Message sent: ' + info.response);
-          res.send('email sent')
-        }
-    });
+    sendAMail = (email_message) => {
+        client.sendMail(email_message, function(err, info){
+            if (err ){
+              console.log(err);
+            }
+            else {
+              console.log('Message sent: ' + info.response);
+              res.send('email sent')
+            }
+        });
+    }
+
+    sendAMail(email1)
+    sendAMail(email2)
+    sendAMail(email3)
+    sendAMail(email4)
+
+
+
+
+    
 };
 
 exports.trial = (req, res) => {

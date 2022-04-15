@@ -12,7 +12,7 @@ exports.postTransact = (req, res) => {
         "<PaymentAmount>0.01</PaymentAmount>" +
         "<PaymentCurrency>USD</PaymentCurrency>" +
         "<CompanyRef>49FKEOA</CompanyRef>" +
-        "<RedirectURL>http://afbr-80930.web.app/dog_registrations</RedirectURL>" +
+        "<RedirectURL>http://afbr-80930.web.app/dog_registrations_success</RedirectURL>" +
         "<BackURL>http://afbr-80930.web.app/dog_registrations</BackURL>" +
         "<CompanyRefUnique>0</CompanyRefUnique>" +
         "<PTL>5</PTL>" +
@@ -20,7 +20,7 @@ exports.postTransact = (req, res) => {
         "<Services>" +
         "  <Service>" +
         "  <ServiceType>3854</ServiceType>" +
-        "  <ServiceDescription>Flight from Nairobi to Diani</ServiceDescription>" +
+        "  <ServiceDescription>Dog Registrations</ServiceDescription>" +
         "<ServiceDate>2013/12/20 19:00</ServiceDate>" +
         " </Service>" +
         "</Services>" +

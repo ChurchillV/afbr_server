@@ -13,7 +13,7 @@ exports.postTransact = (req, res) => {
         "<PaymentCurrency>USD</PaymentCurrency>" +
         "<CompanyRef>49FKEOA</CompanyRef>" +
         "<RedirectURL>http://afbr-80930.web.app/dog_registrations_success</RedirectURL>" +
-        "<BackURL>http://afbr-80930.web.app/dog_registrations</BackURL>" +
+        "<BackURL>http://afbr-80930.web.app/dog_registrations_success</BackURL>" +
         "<CompanyRefUnique>0</CompanyRefUnique>" +
         "<PTL>5</PTL>" +
         "</Transaction>" +

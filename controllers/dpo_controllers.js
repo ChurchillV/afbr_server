@@ -2,6 +2,9 @@ const axios = require('axios')
 var parseString = require('xml2js').parseString;
 
 exports.postTransact = (req, res) => {
+    type = req.body.type
+    transaction_name = req.body.transaction_name
+    transaction_cost = req.body.transaction_cost
 
     var dpo_data =
         "<?xml version='1.0' encoding='utf-8'?>" +
@@ -9,7 +12,7 @@ exports.postTransact = (req, res) => {
         "<CompanyToken>8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3</CompanyToken>" +
         "<Request>createToken</Request>" +
         "<Transaction>" +
-        "<PaymentAmount>0.01</PaymentAmount>" +
+        `<PaymentAmount>${transaction_cost}</PaymentAmount>` +
         "<PaymentCurrency>USD</PaymentCurrency>" +
         "<CompanyRef>49FKEOA</CompanyRef>" +
         "<RedirectURL>http://afbr-80930.web.app/dog_registrations_success</RedirectURL>" +
@@ -20,8 +23,8 @@ exports.postTransact = (req, res) => {
         "<Services>" +
         "  <Service>" +
         "  <ServiceType>3854</ServiceType>" +
-        "  <ServiceDescription>Dog Registrations</ServiceDescription>" +
-        "<ServiceDate>2013/12/20 19:00</ServiceDate>" +
+        `<ServiceDescription>${transaction_name}</ServiceDescription>}` +
+        "<ServiceDate></ServiceDate>" +
         " </Service>" +
         "</Services>" +
         "</API3G>"

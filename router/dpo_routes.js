@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { postTransact } = require('../controllers/dpo_controllers')
 
-router.get('/transact', postTransact)
+router.post('/transact', postTransact)
 
 
 

@@ -1,10 +1,12 @@
 const axios = require('axios')
 var parseString = require('xml2js').parseString;
-
+let today = new Date().toISOString().slice(0, 10)
 exports.postTransact = (req, res) => {
     type = req.body.type
+    console.log(req.body)
     transaction_name = req.body.transaction_name
     transaction_cost = req.body.transaction_cost
+    console.log(transaction_cost)
 
     var dpo_data =
         "<?xml version='1.0' encoding='utf-8'?>" +
@@ -24,7 +26,7 @@ exports.postTransact = (req, res) => {
         "  <Service>" +
         "  <ServiceType>3854</ServiceType>" +
         `<ServiceDescription>${transaction_name}</ServiceDescription>}` +
-        "<ServiceDate></ServiceDate>" +
+        `<ServiceDate>${today}</ServiceDate>` +
         " </Service>" +
         "</Services>" +
         "</API3G>"

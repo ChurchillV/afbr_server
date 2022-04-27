@@ -8,9 +8,9 @@ exports.postTransact = (req, res) => {
     let transaction_cost = req.body.transaction_cost
     console.log(transaction_cost)
 
-    transaction_name = 'Litter Registrations ' ? 
-     RedirectURL = 'http://afbr-80930.web.app/dog_registrations_success'
-     :      RedirectURL = 'http://afbr-80930.web.app/litter_registrations_success'
+    // transaction_name = 'Litter Registrations ' ? 
+    //  RedirectURL = 'http://afbr-80930.web.app/dog_registrations_success'
+    //  :      RedirectURL = 'http://afbr-80930.web.app/litter_registrations_success'
 
 
     var dpo_data =

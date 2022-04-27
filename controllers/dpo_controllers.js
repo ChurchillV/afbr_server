@@ -7,7 +7,6 @@ exports.postTransact = (req, res) => {
     let transaction_name = req.body.transaction_name
     let transaction_cost = req.body.transaction_cost
     console.log(transaction_cost)
-    let RedirectURL = ''
 
     transaction_name = 'Litter Registrations ' ? 
      RedirectURL = 'http://afbr-80930.web.app/dog_registrations_success'
@@ -23,8 +22,8 @@ exports.postTransact = (req, res) => {
         `<PaymentAmount>${transaction_cost}</PaymentAmount>` +
         "<PaymentCurrency>USD</PaymentCurrency>" +
         "<CompanyRef>49FKEOA</CompanyRef>" +
-        `<RedirectURL>${RedirectURL}</RedirectURL>` +
-        `<BackURL>${RedirectURL}</BackURL>` +
+        "<RedirectURL>http://afbr-80930.web.app/dog_registrations_success</RedirectURL>" +
+        "<BackURL>http://afbr-80930.web.app/dog_registrations_success</BackURL>" +
         "<CompanyRefUnique>0</CompanyRefUnique>" +
         "<PTL>5</PTL>" +
         "</Transaction>" +

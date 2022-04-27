@@ -2,11 +2,16 @@ const axios = require('axios')
 var parseString = require('xml2js').parseString;
 let today = new Date().toISOString().slice(0, 10)
 exports.postTransact = (req, res) => {
-    type = req.body.type
+    let type = req.body.type
     console.log(req.body)
-    transaction_name = req.body.transaction_name
-    transaction_cost = req.body.transaction_cost
+    let transaction_name = req.body.transaction_name
+    let transaction_cost = req.body.transaction_cost
     console.log(transaction_cost)
+
+    transaction_name = 'Litter Registrations ' ? 
+     RedirectURL = 'http://afbr-80930.web.app/dog_registrations_success'
+     :      RedirectURL = 'http://afbr-80930.web.app/litter_registrations_success'
+
 
     var dpo_data =
         "<?xml version='1.0' encoding='utf-8'?>" +
@@ -17,7 +22,7 @@ exports.postTransact = (req, res) => {
         `<PaymentAmount>${transaction_cost}</PaymentAmount>` +
         "<PaymentCurrency>USD</PaymentCurrency>" +
         "<CompanyRef>49FKEOA</CompanyRef>" +
-        "<RedirectURL>http://afbr-80930.web.app/dog_registrations_success</RedirectURL>" +
+        `<RedirectURL>${RedirectURL}</RedirectURL>` +
         "<BackURL>http://afbr-80930.web.app/dog_registrations_success</BackURL>" +
         "<CompanyRefUnique>0</CompanyRefUnique>" +
         "<PTL>5</PTL>" +

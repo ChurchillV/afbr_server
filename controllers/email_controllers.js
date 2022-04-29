@@ -20,26 +20,64 @@ exports.postSendRegisterEmail = (req, res) => {
         }
       });
     
+
     // var client = nodemailer.createTransport(sgTransport(options));
     
-    var email = {
+    var email1 = {
       from: 'africanbullyregistry@gmail.com',
-      to: 'yotuo2003@gmail.com',
-      subject: 'Thank you for registering with the African Bully Registry',
-      text: 'Welcome to the Commut=nity',
-      html: '<b>TThe AFBR</b>'
+      to: req.body.user.email,
+      subject: 'New Sign Up',
+      text: 'Dear, your dog has been registered',
+      html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
       
-    };
+    }
+
+    var email2 = {
+        from: 'africanbullyregistry@gmail.com',
+        to: 'yotuo2003@gmail.com',
+        subject: 'New Sign Up',
+        text: 'Dear, your dog has been registered',
+        html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
+        
+      }
+
+    var email3 = {
+        from: 'africanbullyregistry@gmail.com',
+        to: 'africanbullyregistry@gmail.com',
+        subject: 'New Sign Up',
+        text: 'Dear, your dog has been registered',
+        html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
+        
+      }
+
+    var email4 = {
+        from: 'africanbullyregistry@gmail.com',
+        to: 'takyiotuo.to@gmail.com',
+        subject: 'New Sign Up',
+        text: 'Dear, your dog has been registered',
+        html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
+        
+      }
     
-    client.sendMail(email, function(err, info){
-        if (err ){
-          console.log(err);
-        }
-        else {
-          console.log('Message sent: ' + info.response);
-          res.send('email sent')
-        }
-    });
+    sendAMail = (email_message) => {
+        client.sendMail(email_message, function(err, info){
+            if (err ){
+              console.log(err);
+            }
+            else {
+              console.log('Message sent: ' + info.response);
+              res.send('email sent')
+            }
+        });
+    }
+
+    sendAMail(email1)
+    sendAMail(email2)
+    sendAMail(email3)
+    sendAMail(email4)
+
+
+
     
 };
 

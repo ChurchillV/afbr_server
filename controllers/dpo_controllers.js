@@ -25,7 +25,7 @@ exports.postTransact = (req, res) => {
     var dpo_data =
         "<?xml version='1.0' encoding='utf-8'?>" +
         "<API3G>" +
-        "<CompanyToken>8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3</CompanyToken>" +
+        "<CompanyToken>B069C2B2-B27D-42DE-B913-0B539235D0F6</CompanyToken>" +
         "<Request>createToken</Request>" +
         "<Transaction>" +
         `<PaymentAmount>${transaction_cost}</PaymentAmount>` +
@@ -38,7 +38,7 @@ exports.postTransact = (req, res) => {
         "</Transaction>" +
         "<Services>" +
         "  <Service>" +
-        "  <ServiceType>3854</ServiceType>" +
+        "  <ServiceType>51851</ServiceType>" +
         `<ServiceDescription>${transaction_name}</ServiceDescription>}` +
         `<ServiceDate>${today}</ServiceDate>` +
         " </Service>" +

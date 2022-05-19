@@ -5,349 +5,243 @@ const db = require('../config/db')
 var nodemailer = require('nodemailer')
 const dotenv = require('dotenv')
 dotenv.config()
+const ejs = require("ejs");
 
 
+var sgTransport = require('nodemailer-sendgrid-transport');
+
+
+var client = nodemailer.createTransport({
+  service: 'SendGrid',
+  auth: {
+    user: 'apikey',
+    pass: process.env.pass
+  }
+});
 
 
 exports.postSendRegisterEmail = (req, res) => {
-  var sgTransport = require('nodemailer-sendgrid-transport');
-
-  var client = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-      user: 'apikey',
-      pass: process.env.pass
-    }
-  });
+  
 
 
-  // var client = nodemailer.createTransport(sgTransport(options));
 
-  var email1 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: req.body.user.email,
-    subject: 'New Sign Up',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
-
+  function sendAMail(destination) {
+    ejs.renderFile(__dirname + "/user_registered.ejs",
+      { username: req.body.user.username }, function (err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          var mainOptions = {
+            from: 'africanbullyregistry@gmail.com',
+            to: destination,
+            subject: 'Pedigree Uploaded',
+            html: data
+          };
+          console.log(data)
+          client.sendMail(mainOptions, function (err, info) {
+            if (err) {
+              res.json({
+                msg: 'fail'
+              })
+            } else {
+              res.json({
+                msg: 'success'
+              })
+            }
+          });
+        }
+      });
   }
 
-  var email2 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'yotuo2003@gmail.com',
-    subject: 'New Sign Up',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
 
-  }
+  sendAMail('takyiotuo.to@gmail.com')
+  sendAMail('yotuo2003@gmail.com')
+  sendAMail(req.body.user.email)
 
-  var email3 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'africanbullyregistry@gmail.com',
-    subject: 'New Sign Up',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
+  // var email1 = {
+  //   from: 'africanbullyregistry@gmail.com',
+  //   to: req.body.user.email,
+  //   subject: 'New Sign Up',
+  //   text: 'Dear, your dog has been registered',
+  //   html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
 
-  }
+  // }
 
-  var email4 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'takyiotuo.to@gmail.com',
-    subject: 'New Sign Up',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
-
-  }
-
-  sendAMail = (email_message) => {
-    client.sendMail(email_message, function (err, info) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        console.log('Message sent: ' + info.response);
-        res.send('email sent')
-      }
-    });
-  }
-
-  sendAMail(email1)
-  sendAMail(email2)
-  sendAMail(email3)
-  sendAMail(email4)
-
-
-
-
+ 
 };
 
 exports.postSendRegisterDogEmail = (req, res) => {
-  var sgTransport = require('nodemailer-sendgrid-transport');
+  
 
-  var client = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-      user: 'apikey',
-      pass: process.env.pass
+  ejs.renderFile(__dirname + "/dog_registered.ejs", { username: req.body.displayName,
+  dog: req.body.dog }, function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      var mainOptions = {
+        from: 'africanbullyregistry@gmail.com',
+        to: email,
+        subject: 'Dog registered',
+        html: data
+      };
+      //console.log("html data ======================>", mainOptions.html);
+
+      client.sendMail(mainOptions, function (err, info) {
+        if (err) {
+          res.json({
+            msg: 'fail'
+          })
+        } else {
+          res.json({
+            msg: 'success'
+          })
+        }
+      });
     }
   });
 
-  // var client = nodemailer.createTransport(sgTransport(options));
 
-  var email1 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: req.body.user.email,
-    subject: 'Dog registered',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
-
-  }
-
-  var email2 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'yotuo2003@gmail.com',
-    subject: 'Dog registered',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
-
-  }
-
-  var email3 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'africanbullyregistry@gmail.com',
-    subject: 'Dog registered',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
-
-  }
-
-  var email4 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'takyiotuo.to@gmail.com',
-    subject: 'Dog registered',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, thank you for registering ${req.body.dog.name} with the African Bully Registry`,
-
-  }
-
-  sendAMail = (email_message) => {
-    client.sendMail(email_message, function (err, info) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        console.log('Message sent: ' + info.response);
-        res.send('email sent')
-      }
-    });
-  }
-
-  sendAMail(email1)
-  sendAMail(email2)
-  sendAMail(email3)
-  sendAMail(email4)
-
-
-
+    
+  sendAMail('takyiotuo.to@gmail.com')
+  sendAMail('yotuo2003@gmail.com')
+  sendAMail(req.body.user.email)
 
 
 };
 
-exports.trial = (req, res) => {
-  var sgTransport = require('nodemailer-sendgrid-transport');
-
-  var client = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-      user: 'apikey',
-      pass: process.env.pass
-    }
-  });
-
-  // var client = nodemailer.createTransport(sgTransport(options));
-
-  var email = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'yotuo2003@gmail.com',
-    subject: 'Hello',
-    text: 'Hello send grif is the best',
-    html: '<b>Hello world</b>'
-
-  };
-
-  client.sendMail(email, function (err, info) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      console.log('Message sent: ' + info.response);
-      res.send('email sent')
-    }
-  });
-}
-
-
 exports.postLitter = (req, res) => {
-  var sgTransport = require('nodemailer-sendgrid-transport');
+ 
+  let image = 'https://res.cloudinary.com/daurieb51/image/upload/v1642082142/' + req.body.public_id + '.png'
 
 
-  var client = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-      user: 'apikey',
-      pass: process.env.pass
-    }
-  });
-
-  // var client = nodemailer.createTransport(sgTransport(options));
-
-  var email1 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: req.body.user.email,
-    subject: 'Litter Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully completed a litter registration form` +
-      ` with the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
-
+  function sendAMail(destination) {
+    ejs.renderFile(__dirname + "/litter.ejs",
+      { username: req.body.user.displayName, image: image }, function (err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          var mainOptions = {
+            from: 'africanbullyregistry@gmail.com',
+            to: destination,
+            subject: 'Pedigree Uploaded',
+            html: data
+          };
+          console.log(data)
+          client.sendMail(mainOptions, function (err, info) {
+            if (err) {
+              res.json({
+                msg: 'fail'
+              })
+            } else {
+              res.json({
+                msg: 'success'
+              })
+            }
+          });
+        }
+      });
   }
 
 
-  var email2 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'yotuo2003@gmail.com',
-    subject: 'Litter Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully completed a litter registration form` +
-      ` with the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
+  sendAMail('takyiotuo.to@gmail.com')
+  sendAMail('yotuo2003@gmail.com')
+  sendAMail(req.body.user.email)
 
+  // var email1 = {
+  //   from: 'africanbullyregistry@gmail.com',
+  //   to: req.body.user.email,
+  //   subject: 'Litter Registration',
+  //   text: 'Dear, your dog has been registered',
+  //   html: `${req.body.user.displayName}, you have successfully completed a litter registration form` +
+  //     ` with the African Bully Registry` +
+  //     `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
 
-  }
-
-  var email3 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'africanbullyregistry@gmail.com',
-    subject: 'Litter Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully completed a litter registration form` +
-      ` with the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
-
-  }
-
-  var email4 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: 'takyiotuo.to@gmail.com',
-    subject: 'Litter Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully completed a litter registration form` +
-      ` with the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
-
-  }
-
-  sendAMail = (email_message) => {
-    client.sendMail(email_message, function (err, info) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        console.log('Message sent: ' + info.response);
-        res.send('email sent')
-      }
-    });
-  }
-
-  sendAMail(email1)
-  sendAMail(email2)
-  sendAMail(email3)
-  sendAMail(email4)
-
-
-
+  // }
 
 
 };
 
 exports.postPedigree = (req, res) => {
-  var sgTransport = require('nodemailer-sendgrid-transport');
+
+  let image = 'https://res.cloudinary.com/daurieb51/image/upload/v1642082142/' + req.body.public_id + '.png'
 
 
-  var client = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-      user: 'apikey',
-      pass: process.env.pass
-    }
-  });
-
-  // var client = nodemailer.createTransport(sgTransport(options));
-
-  var email1 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: req.body.user.email,
-    subject: 'Pedigree Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully uploaded ` +
-      `a pedigree to the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
-
+  function sendAMail(destination) {
+    ejs.renderFile(__dirname + "/pedigree.ejs",
+      { username: req.body.user.displayName, image: image }, function (err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          var mainOptions = {
+            from: 'africanbullyregistry@gmail.com',
+            to: destination,
+            subject: 'Pedigree Uploaded',
+            html: data
+          };
+          console.log(data)
+          client.sendMail(mainOptions, function (err, info) {
+            if (err) {
+              res.json({
+                msg: 'fail'
+              })
+            } else {
+              res.json({
+                msg: 'success'
+              })
+            }
+          });
+        }
+      });
   }
 
 
-  var email2 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: req.body.user.email,
-    subject: 'Pedigree Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully uploaded ` +
-      `a pedigree to the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
+  sendAMail('takyiotuo.to@gmail.com')
+  sendAMail('yotuo2003@gmail.com')
+  sendAMail(req.body.user.email)
+}
 
+
+exports.contactUs = (req, res) => {
+
+  console.log(req.body)
+
+  function sendAMail(destination) {
+    ejs.renderFile(__dirname + "/contact.ejs",
+      { message: req.body.message }, function (err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          var mainOptions = {
+            from: req.body.from_email,
+            to: destination,
+            subject: 'Contact Us',
+            html: data
+          };
+          console.log(data)
+          client.sendMail(mainOptions, function (err, info) {
+            if (err) {
+              res.json({
+                msg: 'fail'
+              })
+            } else {
+              res.json({
+                msg: 'success'
+              })
+            }
+          });
+        }
+      });
   }
 
-  var email3 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: req.body.user.email,
-    subject: 'Pedigree Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully uploaded ` +
-      `a pedigree to the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
 
-  }
-
-  var email4 = {
-    from: 'africanbullyregistry@gmail.com',
-    to: req.body.user.email,
-    subject: 'Pedigree Registration',
-    text: 'Dear, your dog has been registered',
-    html: `${req.body.user.displayName}, you have successfully uploaded ` +
-      `a pedigree to the African Bully Registry` +
-      `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
-
-  }
-
-  sendAMail = (email_message) => {
-    client.sendMail(email_message, function (err, info) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        console.log('Message sent: ' + info.response);
-        res.send('email sent')
-      }
-    });
-  }
-
-  sendAMail(email1)
-  sendAMail(email2)
-  sendAMail(email3)
-  sendAMail(email4)
+  // sendAMail('takyiotuo.to@gmail.com')
+  sendAMail('yotuo2003@gmail.com')
+  // sendAMail(req.body.user.email)
+}
 
 
 
 
 
-};
+
+  ;

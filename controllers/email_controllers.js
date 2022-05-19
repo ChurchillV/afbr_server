@@ -75,7 +75,7 @@ exports.postSendRegisterDogEmail = (req, res) => {
 
  function sendAMail(destination) {
     ejs.renderFile(__dirname + "/dog_registered.ejs",
-      { username: req.body.user.displayName, image: image }, function (err, data) {
+      { username: req.body.user.displayName }, function (err, data) {
         if (err) {
           console.log(err);
         } else {

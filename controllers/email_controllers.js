@@ -73,32 +73,33 @@ exports.postSendRegisterEmail = (req, res) => {
 exports.postSendRegisterDogEmail = (req, res) => {
   
 
-  ejs.renderFile(__dirname + "/dog_registered.ejs", { username: req.body.displayName,
-  dog: req.body.dog }, function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      var mainOptions = {
-        from: 'africanbullyregistry@gmail.com',
-        to: email,
-        subject: 'Dog registered',
-        html: data
-      };
-      //console.log("html data ======================>", mainOptions.html);
-
-      client.sendMail(mainOptions, function (err, info) {
+ function sendAMail(destination) {
+    ejs.renderFile(__dirname + "/dog_registered.ejs",
+      { username: req.body.user.displayName, image: image }, function (err, data) {
         if (err) {
-          res.json({
-            msg: 'fail'
-          })
+          console.log(err);
         } else {
-          res.json({
-            msg: 'success'
-          })
+          var mainOptions = {
+            from: 'africanbullyregistry@gmail.com',
+            to: destination,
+            subject: 'Pedigree Uploaded',
+            html: data
+          };
+          console.log(data)
+          client.sendMail(mainOptions, function (err, info) {
+            if (err) {
+              res.json({
+                msg: 'fail'
+              })
+            } else {
+              res.json({
+                msg: 'success'
+              })
+            }
+          });
         }
       });
-    }
-  });
+  }
 
 
     

@@ -34,7 +34,7 @@ exports.postSendRegisterEmail = (req, res) => {
           var mainOptions = {
             from: 'africanbullyregistry@gmail.com',
             to: destination,
-            subject: 'Pedigree Uploaded',
+            subject: 'New signup',
             html: data
           };
           console.log(data)
@@ -53,6 +53,7 @@ exports.postSendRegisterEmail = (req, res) => {
       });
   }
 
+  sendAMail('africanbullyregistry@gmail.com')
 
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
@@ -82,7 +83,7 @@ exports.postSendRegisterDogEmail = (req, res) => {
           var mainOptions = {
             from: 'africanbullyregistry@gmail.com',
             to: destination,
-            subject: 'Pedigree Uploaded',
+            subject: 'Dog Registered',
             html: data
           };
           console.log(data)
@@ -102,7 +103,8 @@ exports.postSendRegisterDogEmail = (req, res) => {
   }
 
 
-    
+  sendAMail('africanbullyregistry@gmail.com')
+
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
   sendAMail(req.body.user.email)
@@ -124,7 +126,7 @@ exports.postLitter = (req, res) => {
           var mainOptions = {
             from: 'africanbullyregistry@gmail.com',
             to: destination,
-            subject: 'Pedigree Uploaded',
+            subject: 'Litter Registered',
             html: data
           };
           console.log(data)
@@ -143,6 +145,7 @@ exports.postLitter = (req, res) => {
       });
   }
 
+  sendAMail('africanbullyregistry@gmail.com')
 
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
@@ -195,50 +198,13 @@ exports.postPedigree = (req, res) => {
       });
   }
 
+  sendAMail('africanbullyregistry@gmail.com')
 
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
   sendAMail(req.body.user.email)
 }
 
-
-exports.contactUs = (req, res) => {
-
-  console.log(req.body)
-
-  function sendAMail(destination) {
-    ejs.renderFile(__dirname + "/contact.ejs",
-      { message: req.body.message }, function (err, data) {
-        if (err) {
-          console.log(err);
-        } else {
-          var mainOptions = {
-            from: req.body.from_email,
-            to: destination,
-            subject: 'Contact Us',
-            html: data
-          };
-          console.log(data)
-          client.sendMail(mainOptions, function (err, info) {
-            if (err) {
-              res.json({
-                msg: 'fail'
-              })
-            } else {
-              res.json({
-                msg: 'success'
-              })
-            }
-          });
-        }
-      });
-  }
-
-
-  // sendAMail('takyiotuo.to@gmail.com')
-  sendAMail('yotuo2003@gmail.com')
-  // sendAMail(req.body.user.email)
-}
 
 
 

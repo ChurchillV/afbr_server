@@ -24,10 +24,10 @@ exports.postSendRegisterEmail = (req, res) => {
   
 
 
-
+  console.log('req.body',req.body)
   function sendAMail(destination) {
     ejs.renderFile(__dirname + "/user_registered.ejs",
-      { username: req.body.user.username }, function (err, data) {
+      { username: req.body.username }, function (err, data) {
         if (err) {
           console.log(err);
         } else {
@@ -57,17 +57,9 @@ exports.postSendRegisterEmail = (req, res) => {
 
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
-  sendAMail(req.body.user.email)
+  sendAMail(req.body.email)
 
-  // var email1 = {
-  //   from: 'africanbullyregistry@gmail.com',
-  //   to: req.body.user.email,
-  //   subject: 'New Sign Up',
-  //   text: 'Dear, your dog has been registered',
-  //   html: `${req.body.user.username}, thank you for signing up with the African Bully Registry`,
-
-  // }
-
+ 
  
 };
 
@@ -151,17 +143,7 @@ exports.postLitter = (req, res) => {
   sendAMail('yotuo2003@gmail.com')
   sendAMail(req.body.user.email)
 
-  // var email1 = {
-  //   from: 'africanbullyregistry@gmail.com',
-  //   to: req.body.user.email,
-  //   subject: 'Litter Registration',
-  //   text: 'Dear, your dog has been registered',
-  //   html: `${req.body.user.displayName}, you have successfully completed a litter registration form` +
-  //     ` with the African Bully Registry` +
-  //     `<img src='https://res.cloudinary.com/daurieb51/image/upload/v1642082142/${req.body.public_id}.png'}/>`
-
-  // }
-
+  
 
 };
 

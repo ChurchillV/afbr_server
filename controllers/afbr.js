@@ -139,6 +139,7 @@ exports.getOneDog = (req, res) => {
             throw err;
         }
         res.send(result)
+        console.log(result)
         console.log('logging from exports.get oned dog ', query.sql)
     })
 }

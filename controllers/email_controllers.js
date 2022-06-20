@@ -37,7 +37,7 @@ exports.postSendRegisterEmail = (req, res) => {
             subject: 'New signup',
             html: data
           };
-          console.log(data)
+          // console.log(data)
           client.sendMail(mainOptions, function (err, info) {
             if (err) {
               res.json({
@@ -78,7 +78,7 @@ exports.postSendRegisterDogEmail = (req, res) => {
             subject: 'Dog Registered',
             html: data
           };
-          console.log(data)
+          // console.log(data)
           client.sendMail(mainOptions, function (err, info) {
             if (err) {
               res.json({
@@ -121,7 +121,7 @@ exports.postLitter = (req, res) => {
             subject: 'Litter Registered',
             html: data
           };
-          console.log(data)
+          // console.log(data)
           client.sendMail(mainOptions, function (err, info) {
             if (err) {
               res.json({
@@ -164,7 +164,7 @@ exports.postPedigree = (req, res) => {
             subject: 'Pedigree Uploaded',
             html: data
           };
-          console.log(data)
+          // console.log(data)
           client.sendMail(mainOptions, function (err, info) {
             if (err) {
               res.json({

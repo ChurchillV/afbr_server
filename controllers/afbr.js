@@ -19,7 +19,7 @@ exports.getAllDogs = (req, res) => {
 
 
 exports.getAllDogsByUser = (req, res) => {
-    console.log(req.params.id)
+    console.log('req.params.id, ', req.params.id)
     id = Number(req.params.id)
     let sql = 'SELECT * FROM dog WHERE user = ?  ORDER BY name';
     let query = db.query(sql, id, (err, result, fields) => {
@@ -30,13 +30,13 @@ exports.getAllDogsByUser = (req, res) => {
     })
 };
 exports.postAddDogImage = (req, res) => {
-    console.log('here', req.body)
+    console.log('request body', req.body)
     console.log('request body', req.body)
     let new_field = ''
     let field = Object.keys(req.body)
-    console.log('field', field.toString())
+    console.log('form fields', field.toString())
     let value = Object.values(req.body)
-    console.log('value', value)
+    console.log('form valuse', value)
     for (let i = 0; i < value.length; i++) {
         new_field += "\""
         new_field += value[i]
@@ -64,14 +64,14 @@ exports.postAddDogImage = (req, res) => {
 }
 
 exports.postCreateDog = (req, res) => {
-    console.log('here', req.body.dog)
-    console.log('request body..', req.body.user.displayName)
+    console.log('request.body.dog', req.body.dog)
+    console.log('request body.user displayName..', req.body.user.displayName)
     let new_field = ''
     var users_id = ''
     let field = Object.keys(req.body.dog)
-    console.log('field', field.toString())
+    console.log('fprm field', field.toString())
     let value = Object.values(req.body.dog)
-    console.log('value', value)
+    console.log('form value', value)
     for (let i = 0; i < value.length; i++) {
         new_field += "'"
         new_field += value[i]

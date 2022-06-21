@@ -25,6 +25,8 @@ exports.postTransact = (req, res) => {
 
     }
 
+    console.log(RedirectURL)
+
     //  http://afbr-80930.web.app/dog_registrations_success
     var dpo_data =
         "<?xml version='1.0' encoding='utf-8'?>" +

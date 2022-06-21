@@ -21,12 +21,13 @@ exports.getAllDogs = (req, res) => {
 exports.getAllDogsByUser = (req, res) => {
     console.log('req.params.id, ', req.params.id)
     id = Number(req.params.id)
-    let sql = 'SELECT * FROM dog WHERE user = ?  ORDER BY name';
+    let sql = "SELECT * FROM dog WHERE user = ? AND hasBeenPaidFor='yes' ORDER BY name";
     let query = db.query(sql, id, (err, result, fields) => {
         if (err) {
             throw err;
         }
         res.send(result)
+        console.log(result)
     })
 };
 exports.postAddDogImage = (req, res) => {
@@ -65,7 +66,7 @@ exports.postAddDogImage = (req, res) => {
 
 exports.postCreateDog = (req, res) => {
     console.log('request.body.dog', req.body.dog)
-    console.log('request body.user displayName..', req.body.user.displayName)
+    console.log('request body.user ..', req.body.user)
     let new_field = ''
     var users_id = ''
     let field = Object.keys(req.body.dog)
@@ -82,8 +83,6 @@ exports.postCreateDog = (req, res) => {
 
 
     }
-
-
     console.log('newfield', new_field)
     let sql = `INSERT INTO dog (${field}) VALUES (${new_field})`;
     let query = db.query(sql, value, (err, result, fields) => {
@@ -125,6 +124,10 @@ exports.postCreateDog = (req, res) => {
         })
     })
 
+    if (req.body.setHasBeenPaidFor){
+        
+    }
+
 
 
 };
@@ -135,6 +138,21 @@ exports.getOneDog = (req, res) => {
     let sql = 'SELECT * FROM dog WHERE id = ?';
 
     let query = db.query(sql, id, (err, result, fields) => {
+        if (err) {
+            throw err;
+        }
+        res.send(result)
+        console.log(result)
+        console.log('logging from exports.get oned dog ', query.sql)
+    })
+}
+
+exports.getOneDogByName = (req, res) => {
+    console.log(req.params.name)
+    let name = req.params.name
+    let sql = 'SELECT * FROM dog WHERE name = ?';
+
+    let query = db.query(sql, name, (err, result, fields) => {
         if (err) {
             throw err;
         }
@@ -424,13 +442,8 @@ exports.getAllDams = (req, res) => {
 };
 
 exports.getSearch = (req, res) => {
-
-
     search_input = req.params.search_input
-
-
-
-    let sql = `SELECT id, name FROM dog WHERE name LIKE "%${search_input}%" OR afbr_no="${search_input}" ORDER BY name`;
+    let sql = `SELECT id, name FROM dog WHERE (name LIKE "%${search_input}%" OR afbr_no="${search_input}") AND hasBeenPaidFor='yes' ORDER BY name; `;
     let query = db.query(sql, (err, result, fields) => {
         if (err) {
             throw err;
@@ -439,10 +452,21 @@ exports.getSearch = (req, res) => {
         res.send(result)
         console.log('search results for', result[0])
     })
-
-
-
-
-
-
 };
+
+exports.setHasBeenPaidFor = (req, res) => {
+    let dog_name = req.body.dog.name
+    var id;
+
+
+    let sql2 = `UPDATE dog  SET hasBeenPaidFor='yes' WHERE name='${dog_name}'`;
+    let query2 = db.query(sql2, dog_name, (err, result2, fields) => {
+        if (err) {
+            throw err;
+        }
+        res.send(result2)
+        console.log('succeessfull paid for dog')
+        console.log(query2.sql)
+        console.log(result2)
+    })
+}

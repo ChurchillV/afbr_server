@@ -10,13 +10,15 @@ exports.postTransact = (req, res) => {
     let transaction_cost = req.body.transaction_cost
     console.log(transaction_cost)
     let RedirectURL = ''
-
+    let dog_name = req.body.dog_name
+    let username = req.body.username
+    
     if (transaction_name == 'Litter_Registrations') {
         RedirectURL = 'http://afbr-80930.web.app/litter_registrations_success'
         console.log('litter registrations in gettransact url')
     }
     else {
-        RedirectURL = 'http://afbr-80930.web.app/dog_registrations_success'
+        RedirectURL = `http://afbr-80930.web.app/dog_registrations_success/${dog_name}/${username}`
         console.log('other registrations in gettransact url')
 
     }
@@ -54,7 +56,7 @@ exports.postTransact = (req, res) => {
 
                 TransToken = result.API3G.TransToken
                 console.log('result', result)
-                console.log('Transtoken', result.API3G.TransToken)
+                console.log('Transtoken', TransToken)
                 res.send('https://secure.3gdirectpay.com/dpopayment.php?ID=' + TransToken)
             })
         }

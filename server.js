@@ -3,6 +3,7 @@
 require("dotenv").config();
 const express = require('express');
 const afbr = require('./router/afbr')
+
 const db_routes = require('./router/db_routes')
 const user_routes = require('./router/user_routes')
 const app = express()
@@ -46,3 +47,5 @@ const { parse } = require("dotenv");
 app.listen(PORT, () => {
     console.log(`server i s running on http://localhost:${PORT}`)
 });
+
+module.exports = app;

@@ -20,7 +20,7 @@ exports.postTransact = (req, res) => {
         console.log('litter registrations in gettransact url')
     }
     else {
-        RedirectURL = `https://afbr-80930.web.app/dog_registrations_success/${dog_name}/${username}`
+        RedirectURL = `https://afbr-80930.web.app/dog_registrations_success/${dog_name}/${username}/`
         console.log('other registrations in gettransact url')
 
     }

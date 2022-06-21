@@ -81,13 +81,9 @@ exports.postSendRegisterDogEmail = (req, res) => {
           // console.log(data)
           client.sendMail(mainOptions, function (err, info) {
             if (err) {
-              res.json({
-                msg: 'fail'
-              })
+              console.log('fail')
             } else {
-              res.json({
-                msg: 'success'
-              })
+             console.log('success')
             }
           });
         }

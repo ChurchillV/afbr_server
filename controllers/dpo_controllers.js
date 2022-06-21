@@ -13,12 +13,14 @@ exports.postTransact = (req, res) => {
     let dog_name = req.body.dog_name
     let username = req.body.username
     
+    console.log(dog_name, username)
+
     if (transaction_name == 'Litter_Registrations') {
-        RedirectURL = 'http://afbr-80930.web.app/litter_registrations_success'
+        RedirectURL = 'https://afbr-80930.web.app/litter_registrations_success'
         console.log('litter registrations in gettransact url')
     }
     else {
-        RedirectURL = `http://afbr-80930.web.app/dog_registrations_success/${dog_name}/${username}`
+        RedirectURL = `https://afbr-80930.web.app/dog_registrations_success/${dog_name}/${username}`
         console.log('other registrations in gettransact url')
 
     }

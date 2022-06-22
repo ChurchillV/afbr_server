@@ -11,7 +11,7 @@ exports.postTransact = (req, res) => {
     var transaction_cost;
     let RedirectURL = ''
     let dog_name = req.body.dog_name
-    let username = req.body.username
+    let username = req.body.username || 'DEAR AFBR USER'
     let email = req.body.email
     
     console.log(dog_name, username)
@@ -62,7 +62,6 @@ exports.postTransact = (req, res) => {
     }
 
     console.log(RedirectURL)
-    console.log(transaction_cost, 'is the transaction cost')
     //  http://afbr-80930.web.app/dog_registrations_success
     
     
@@ -91,6 +90,7 @@ exports.postTransact = (req, res) => {
         "</Services>" +
         "</API3G>"
 
+        console.log(transaction_cost, 'is the transaction cost')
 
         console.log(dpo_data)
 

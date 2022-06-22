@@ -9,7 +9,6 @@ describe('dpo should work', () => {
       .send({
         transaction_name: 'Test',
         dog_name: 'hope',
-        username: 'h'
       })
     
     expect(res.statusCode).toEqual(200)

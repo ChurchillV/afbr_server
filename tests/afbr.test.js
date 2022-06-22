@@ -49,30 +49,30 @@ const app = require('../server')
 //     })
 // })
 
-describe('TEST search works', () => {
-    it('make sure unnpaid ones do not show', async () => {
-        const res = await request(app)
-            .get('/api/dogs/search/chaka')
+// describe('TEST search works', () => {
+//     it('make sure unnpaid ones do not show', async () => {
+//         const res = await request(app)
+//             .get('/api/dogs/search/chaka')
             
 
 
-        // console.log('body', res.data)
-        expect(res.statusCode).toEqual(200)
+//         // console.log('body', res.data)
+//         expect(res.statusCode).toEqual(200)
 
-        // console.log('text', res)
-    })
-})
+//         // console.log('text', res)
+//     })
+// })
 
-describe('give only users dogs', () => {
-    it('make sure unnpaid ones do not show', async () => {
-        const res = await request(app)
-            .get('/api/dogs/getdoguser/9')
+// describe('give only users dogs', () => {
+//     it('make sure unnpaid ones do not show', async () => {
+//         const res = await request(app)
+//             .get('/api/dogs/getdoguser/9')
             
 
 
-        // console.log('body', res.data)
-        expect(res.statusCode).toEqual(200)
+//         // console.log('body', res.data)
+//         expect(res.statusCode).toEqual(200)
 
-        // console.log('text', res)
-    })
-})
+//         // console.log('text', res)
+//     })
+// })

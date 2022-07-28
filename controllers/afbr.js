@@ -27,7 +27,7 @@ exports.getAllDogsByUser = (req, res) => {
             throw err;
         }
         res.send(result)
-        console.log(result)
+        // console.log(result)
     })
 };
 exports.postAddDogImage = (req, res) => {

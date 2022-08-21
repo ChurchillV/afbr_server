@@ -16,48 +16,65 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-    <link href= "/public/assets/styles.css" rel="stylesheet" type="text/css" />
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
     <title>D</title>
     <style>
-    
+        .body{
+            font-size: 15px;
+            padding: 1%;
+            color: black;
+            font-weight: 400;
+            line-height: 2;
+        }
+        .bgo{
+            background-color: #ba8108;
+        }
     </style>
 </head>
-<body>
-    <div class="container mx-5 bg-dark text-white ">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-sm-">
-                <p>Dear <%= username %> , thank you for signing up with the 
-                African Bully Registry</p>
+<body class="body">
+    <div class="container mx-5 bg-dark text-white "style="padding: 5%;">
+        <div class="row align-items-center justify-content-center bgo" style="
+            text-transform: uppercase; padding: 2%; color: white;">
+            <div class="col-sm-12" >
+                <h4>Welcome to the African Bully Commmunity 
+                    <span style="text-transform: uppercase; color: #ba8108;"><%= username %> </span>
+                </h4>
+                
+                
             </div>
         </div>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-sm-">
-                <p>The African Bully Registry is committed to uniting bully breeds
-                    across Africa and internationally.
-                </p> 
-               
+        <div style="margin: 4%;">
+            <div class="row align-items-center justify-content-center " >
+                <div class="col-sm-12">
+                    <p>Dear <span style="text-transform: uppercase; color: #ba8108;"><%= username %> </span>, 
+                        thank you for signing up with the African Bully Registry
+                    </p>    
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center yaw">
+                <div class="col-sm-12">
+                    <p>The African Bully is dedicated to uniting bully breeds especially 
+                        in Africa.
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-sm-12">
+                    <p>Kind regards the African Bully Registry</p>
+                </div>
             </div>
         </div>
-    </div>
-        <div class="row align-items-center justify-content-center yaw">
+     
+        <div class="row align-items-center justify-content-center bgo" style="padding: 5%; color: white;">
             <div class="col-sm-12">
-                <p>Please stay tuned to our upcoming activities</p>
-                <p>Have a great day!
-                </p>
-            </div>
-        </div>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-sm-12">
-                <p>Kind regards the African Bully Registry</p>
-            </div>
-        </div>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-sm-12">
-                <p>Please contact us with this email</p>
+                <p>Please feel free to contact us with this email</p>
                 <p>Or you may reach us at +233 20 377 5123 for any further assistance you may require</p>
             </div>
         </div>
  
+    </div>
+       
 
 </body>
 </html>

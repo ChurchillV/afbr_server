@@ -100,6 +100,10 @@ exports.postSendRegisterDogEmail = (req, res) => {
 
 };
 
+exports.testcss = (req, res) => {
+  res.render('pages/dog_registered.ejs', {username:'Chairman', dog:{name:'douglas'}})
+}
+
 exports.postLitter = (req, res) => {
  
   let image = 'https://res.cloudinary.com/daurieb51/image/upload/v1642082142/' + req.body.public_id + '.png'
@@ -182,6 +186,7 @@ exports.postPedigree = (req, res) => {
   sendAMail('yotuo2003@gmail.com')
   sendAMail(req.body.user.email)
 }
+
 
 
 

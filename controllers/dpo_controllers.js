@@ -18,49 +18,9 @@ exports.postTransact = (req, res) => {
 
     console.log(dog_name, username)
 
-    const getcurrentuserLocation = () => {
-        axios.get('https://ipapi.co/json/')
+   
 
-            .then((res) => {
-                console.log(res.data)
-                if (res.data.country_name === 'Ghana') {
-                    if (transaction_name == "litter_registrations") transaction_cost = 20.00
-                    if (transaction_name == 'dog_registrations') transaction_cost = 30.00
-                    if (transaction_name == 'adult_registrations') transaction_cost = 35.00
-                    if (transaction_name == 'Test') {
-                        transaction_cost = 0.50
-                        company_token = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3'
-                        service_type = "3854"
-                    }
-
-                    console.log('transactions cost', transaction_cost)
-
-                }
-                else {
-                    if (transaction_name == "litter_registrations") transaction_cost = 25.00
-                    if (transaction_name == 'dog_registrations') transaction_cost = 35.00
-                    if (transaction_name == 'adult_registrations') transaction_cost = 40.00
-                    if (transaction_name == 'Test') {
-                        transaction_cost = 0.50
-                        company_token = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3'
-                        service_type = "3854"
-                    }
-
-                    console.log('transactions cost', transaction_cost)
-
-
-                }
-
-                sendMoney()
-            })
-
-
-            .catch((err) => console.log(err))
-    }
-
-    getcurrentuserLocation()
-
-    if (transaction_name == 'Litter_Registrations') {
+    if (transaction_name == 'litter_registrations') {
         RedirectURL = 'https://afbr-80930.web.app/litter_registrations_success'
         console.log('litter registrations in gettransact url')
     }
@@ -103,7 +63,6 @@ exports.postTransact = (req, res) => {
         console.log(transaction_cost, 'is the transaction cost')
 
         console.log(dpo_data)
-        console.log('company token - ', company_token)
 
         axios.post('https://secure.3gdirectpay.com/API/v6/', data = dpo_data)
             .then((response) => {
@@ -122,6 +81,45 @@ exports.postTransact = (req, res) => {
 
     }
 
+    const getcurrentuserLocation = () => {
+   
+                if (req.body.location === 'Ghana') {
+                    console.log('Ghanaian location')
+                    if (transaction_name == "litter_registrations") transaction_cost = 20.00
+                    if (transaction_name == 'dog_registrations') transaction_cost = 30.00
+                    if (transaction_name == 'adult_registrations') transaction_cost = 35.00
+                    if (transaction_name == 'Test') {
+                        transaction_cost = 0.50
+                        company_token = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3'
+                        service_type = "3854"
+                    }
 
+                    console.log('transactions cost', transaction_cost)      
+
+                }
+                else {
+                    console.log('non Ghanaian location')
+
+                    if (transaction_name == "litter_registrations") transaction_cost = 25.00
+                    if (transaction_name == 'dog_registrations') transaction_cost = 35.00
+                    if (transaction_name == 'adult_registrations') transaction_cost = 40.00
+                    if (transaction_name == 'Test') {
+                        transaction_cost = 0.50
+                        company_token = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3'
+                        service_type = "3854"
+                    }
+
+                    console.log('transactions cost', transaction_cost)
+
+
+                }
+
+                sendMoney()
+            
+
+
+    }
+
+    getcurrentuserLocation()
 
 }

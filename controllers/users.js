@@ -2,8 +2,9 @@
 
 bcrypt = require('bcryptjs')
 const db = require('../config/db')
-
-
+const axios = require('axios')
+const url2 = require('../weburl')
+const url = url2['url']
 
 exports.getAllUsers = (req, res) => {
 
@@ -13,7 +14,7 @@ exports.getAllUsers = (req, res) => {
         if (err) {
             throw err;
         }
-        res.send(result)
+        res.send(url)
     })
 };
 
@@ -63,18 +64,21 @@ exports.postCreateUser = (req, res) => {
             if ( i < value.length - 1){
                 new_field += ','
             }           
-
-
         }
         username = req.body.username
         email = req.body.email
-
+        uid = req.body.uid
         console.log('newfield', new_field)
         let sql = `INSERT INTO users (${field}) VALUES (${new_field})`;
         let query = db.query(sql, value, (err, result, fields) => {
             if (err){
                 throw err;
             }
+            axios
+            .post(`${url}api/email/email_register`, { uid: uid, username: username, email: email })
+            .then((res) => console.log('successfully sent email'))
+            .catch((err) => console.log(err))
+      
             res.send(result)
         })
     }

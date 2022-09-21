@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { postTransact } = require('../controllers/dpo_controllers')
+const { postTransact } = require('../controllers/expresspaygh_controllers')
 
 router.post('/transact', postTransact)
 

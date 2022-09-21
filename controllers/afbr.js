@@ -66,7 +66,7 @@ exports.postAddDogImage = (req, res) => {
 
 exports.postCreateDog = (req, res) => {
     console.log('request.body.dog', req.body.dog)
-    console.log('request body.user ..', req.body.user)
+    console.log('request body.user ..', req.body.user.email)
     let new_field = ''
     var users_id = ''
     let field = Object.keys(req.body.dog)

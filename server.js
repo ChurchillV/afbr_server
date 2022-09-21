@@ -11,12 +11,8 @@ const cors = require('cors');
 const db = require('./config/db');
 const picture_routes = require('./router/picture_routes')
 const email_routes = require('./router/email_routes')
-const dpo_routes = require('./router/dpo_routes')
-var parseString = require('xml2js').parseString;
+const expresspaygh_routes = require('./router/expresspaygh_routes')
 
-const axios = require('axios')
-const mysql = require('mysql')
-const multer = require('multer')
 var nodemailer = require('nodemailer')
 var mysqlApostrophe = require("mysql-apostrophe")
 var bodyParser = require("body-parser")
@@ -32,14 +28,7 @@ app.use(mysqlApostrophe);
 app.use("/api/dogs", afbr);
 app.use('/', db_routes)
 app.use('/api/users', user_routes)
-app.use('/api/dpo', dpo_routes)
-
-// app.use(express.static(__dirname + '/css'));
-// app.set('view engine', 'ejs');
-// app.get('/test', function(req, res) {
-//     res.render('pages/dog_registered.ejs');
-//   });
-
+app.use('/api/expresspaygh', expresspaygh_routes)
 
 
 app.use('/api/email', email_routes)

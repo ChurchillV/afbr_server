@@ -15,7 +15,7 @@ exports.postTransact = (req, res) => {
     let lastname = username[1]
     //change the name to a list format]
     let email = req.body.email
-    let phone_number = 02020
+    let phone_number = "2020"
     var merchant_id = "461826155167"
     var api_key = "7FdxlkOcWh16T0RDoajGL-xtPNm87sztz1H43troqY-jlXsSEpZcgHH1JQstlAx-H2LY442qj6Vqa1QShZZ"
 
@@ -28,34 +28,34 @@ exports.postTransact = (req, res) => {
         console.log('other registrations in gettransact url')
 
     }
-
-    console.log(RedirectURL)
-
     const sendMoney = () => {
 
         expressgh_data = {
-            'merchant-id': merchant_id,
-            'api-key': api_key,
-            'firstname': firstname,
-            'lastname': lastname,
-            'email': email,
-            'phonenumber': phone_number,
-            'currency': 'USD',
-            'amount': 0.10,
-            'order-id': 'qtslp',
-            'redirect-url':RedirectURL,
+            "merchant-id": merchant_id,
+            "api-key": api_key,
+            "firstname": firstname,
+            "lastname": lastname,
+            "email": email,
+            "phonenumber": phone_number,
+            "currency": "USD",
+            "amount": "0.10",
+            "order-id": "qtslp",
+            "redirect-url":RedirectURL,
         }
 
         console.log('expressghdata', expressgh_data)
         axios.post('https://sandbox.expresspaygh.com/api/submit.php', 
-                data = expressgh_data)
+                 expressgh_data, {
+                headers : {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }})
             .then((response) => {
-                var TransToken = ''
                 token = response.data.token
-                console.log('Transtoken', response.data)
+                console.log('response', response)
                 res.send('https://sandbox.expresspaygh.com/api/checkout.php?token=' + token)
             }
             )
+
             .catch((err) => console.log(err))
 
     }

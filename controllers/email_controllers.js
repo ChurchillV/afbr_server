@@ -100,10 +100,6 @@ exports.postSendRegisterDogEmail = (req, res) => {
 
 };
 
-exports.testcss = (req, res) => {
-  res.render('pages/dog_registered.ejs', {username:'Chairman', dog:{name:'douglas'}})
-}
-
 exports.postLitter = (req, res) => {
  
   let image = 'https://res.cloudinary.com/daurieb51/image/upload/v1642082142/' + req.body.public_id + '.png'
@@ -188,7 +184,38 @@ exports.postPedigree = (req, res) => {
 }
 
 
+exports.postExpresspayUrl = (req, res) => {
+  console.log('updating transaction status')
+  function sendAMail(destination) {
+    ejs.renderFile(__dirname + "/successpay.ejs",
+       function (err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          var mainOptions = {
+            from: 'africanbullyregistry@gmail.com',
+            to: destination,
+            subject: 'Transaction status update',
+            html: data
+          };
+          // console.log(data)
+          client.sendMail(mainOptions, function (err, info) {
+            if (err) {
+              res.json({
+                msg: 'fail'
+              })
+            } else {
+              res.json({
+                msg: 'success'
+              })
+            }
+          });
+        }
+      });
+  }
+  sendAMail('yotuo2003@gmail.com')
 
+};
 
 
 

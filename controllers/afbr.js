@@ -470,3 +470,30 @@ exports.setHasBeenPaidFor = (req, res) => {
         console.log(result2)
     })
 }
+
+exports.setTokenAndOrderId = (req, res) => {
+    let dog_name = req.body.dog_name
+    
+    let sql2 = `UPDATE dog  SET expresspay_token="${req.body.token}" WHERE name='${dog_name}'`;
+    let query = db.query(sql2, (err, result2, fields) => {
+        if (err) {
+            throw err;
+        }
+        // res.send(result2)
+        // console.log('succeessfull set token')
+        // console.log(query.sql)
+    })
+
+    let sql3 = `UPDATE dog  SET expresspay_order_id="${req.body.order_id}" WHERE name='${dog_name}'`;
+    let query2 = db.query(sql3, (err, result2, fields) => {
+        if (err) {
+            throw err;
+        }
+        res.send(result2)
+        console.log(result2.status)
+        console.log('succeessfull set order_id')
+
+    })
+
+}
+

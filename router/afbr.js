@@ -5,7 +5,7 @@ const { getAllDogs, postCreateDog,
     getOneDog, deleteDog, putUpdateDog, 
     getAllDogsByUser,
     getAllSires,getAllDams, getPedigree, 
-    getSearch, return_dog_id, postAddDogImage, setHasBeenPaidFor } = require('../controllers/afbr')
+    getSearch, return_dog_id, postAddDogImage, setHasBeenPaidFor, setTokenAndOrderId } = require('../controllers/afbr')
 
 const { postCreateDogTemp , verifyDogPayment, sendToPermanentDb} = require('../controllers/afbr2')
 router.get("/", getAllDogs)
@@ -25,7 +25,7 @@ router.post('/dog_verification', verifyDogPayment)
 
 router.post('/has_paid', setHasBeenPaidFor)
 
-
+router.post('/set_token_and_order_id', setTokenAndOrderId)
 
 router.post('/addImage/:dog_name', postAddDogImage)
 

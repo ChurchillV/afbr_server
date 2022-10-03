@@ -19,6 +19,7 @@ exports.postTransact = (req, res) =>
     let email = req.body.email
     let phone_number = "2020"
     let order_id = 'afjfs'
+    let a = ''
     var postExpresspayUrl = 'https://localhost:3000/api/email/expresspay_post_url'
     if (transaction_name == 'litter_registrations')
     {

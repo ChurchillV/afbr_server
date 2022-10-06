@@ -57,6 +57,8 @@ exports.postSendRegisterEmail = (req, res) => {
 
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
+  sendAMail('vinchurch70@gmail.com')
+
   sendAMail(req.body.email)
 
  
@@ -96,6 +98,8 @@ exports.postSendRegisterDogEmail = (req, res) => {
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
   sendAMail(req.body.user.email)
+  sendAMail('vinchurch70@gmail.com')
+
 
 
 };
@@ -138,6 +142,8 @@ exports.postLitter = (req, res) => {
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
   sendAMail(req.body.user.email)
+  sendAMail('vinchurch70@gmail.com')
+
 
   
 
@@ -180,14 +186,19 @@ exports.postPedigree = (req, res) => {
 
   sendAMail('takyiotuo.to@gmail.com')
   sendAMail('yotuo2003@gmail.com')
+  sendAMail('vinchurch70@gmail.com')
+
   sendAMail(req.body.user.email)
 }
 
 
 exports.postExpresspayUrl = (req, res) => {
   console.log('updating transaction status')
+
   function sendAMail(destination) {
     ejs.renderFile(__dirname + "/successpay.ejs",
+    { dog_name: req.params.dog_name,
+       email: req.params.email, order_id: req.params.order_id},
        function (err, data) {
         if (err) {
           console.log(err);
@@ -214,6 +225,7 @@ exports.postExpresspayUrl = (req, res) => {
       });
   }
   sendAMail('yotuo2003@gmail.com')
+  sendAMail('vinchurch70@gmail.com')
 
 };
 

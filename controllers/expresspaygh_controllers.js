@@ -6,25 +6,29 @@ var api_key = "7FdxlkOcWh16T0RDoajGL-xtPNm87sztz1H43troqY-jlXsSEpZcgHH1JQstlAx-H
 
 exports.postTransact = (req, res) =>
 {
+    var datetime = new Date();
+    datetime_today = datetime.toJSON();
     let type = req.body.type
     let transaction_name = req.body.transaction_name
-    console.log('request body in frontend ', req.body)
-    console.log(transaction_name)
+    // console.log('transaction name is',transaction_name)
     var transaction_cost = req.body.transaction_cost
     let RedirectURL = ''
-    let dog_name = req.body.dog_name || 'No name supplied'
+    let dog_name = req.body.dog_name || 'No dog name supplied'
     let username = req.body.username || 'DEAR AFBR USER'
+    // console.log('.....username', username)
+
     let firstname = username.split(" ")[0]
-    let lastname = username.split(" ")[-1]
+    let lastname = username.split(" ")[username.split(" ").length - 1]
     let email = req.body.email
-    let phone_number = "2020"
-    let order_id = 'afjfs'
-    let a = ''
-    var postExpresspayUrl = `${url}api/email/expresspay_post_url`
+    let phone_number = req.body.phone_number
+    let order_id = firstname +  datetime_today + lastname
+    
+    var postExpresspayUrl = `${url}api/email/expresspay_post_url/${email}/${dog_name}/${order_id}`
     if (transaction_name == 'litter_registrations')
     {
-        RedirectURL = `https://africanbullyregistry.com/dog_registrations_success/${dog_name}/${username}/${email}/`
+        RedirectURL = `https://africanbullyregistry.com/litter_registrations_success`
         console.log('litter registrations in gettransact url')
+        // console.log(RedirectURL)
     }
     else
     {
@@ -41,12 +45,13 @@ exports.postTransact = (req, res) =>
             "lastname": lastname,
             "email": email,
             "phonenumber": phone_number,
-            "currency": "GHS",
+            "currency": "USD",
             "amount": transaction_cost,
             "order-id": order_id,
             "redirect-url": RedirectURL,
             "post-url": postExpresspayUrl
         }
+        console.log(expressgh_data)
 
         axios({
             method: 'post',

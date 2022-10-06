@@ -9,7 +9,7 @@ router.post('/dog_registered', postSendRegisterDogEmail)
 
 router.post('/litter', postLitter)
 
-router.post('/expresspay_post_url', postExpresspayUrl)
+router.post('/expresspay_post_url/:email/:dog_name/:order_id', postExpresspayUrl)
 
 
 router.post('/pedigree', postPedigree)

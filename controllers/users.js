@@ -14,7 +14,7 @@ exports.getAllUsers = (req, res) => {
         if (err) {
             throw err;
         }
-        res.send(url)
+        res.send(result)
     })
 };
 

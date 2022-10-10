@@ -2,17 +2,17 @@ const axios = require('axios')
 var parseString = require('xml2js').parseString;
 let today = new Date().toISOString().slice(0, 10)
 
-exports.postTransact = (req, res) => {
+exports.postTransactDpo = (req, res) => {
+    console.log('here')
     let type = req.body.type
     console.log(req.body)
-    let transaction_name = req.body.transaction_name
+    let transaction_name = req.body.transaction_name || 'dog_registrations'
     console.log(transaction_name)
-    // let transaction_cost = req.body.transaction_cost
-    var transaction_cost;
+    let transaction_cost = 21.00
     let RedirectURL = ''
-    let dog_name = req.body.dog_name
+    let dog_name = 'African BullyStyles Eno'
     let username = req.body.username || 'DEAR AFBR USER'
-    let email = req.body.email
+    let email = req.body.email 
     var company_token = "B069C2B2-B27D-42DE-B913-0B539235D0F6"
     var service_type = "51851"
 
@@ -80,46 +80,7 @@ exports.postTransact = (req, res) => {
             .catch((err) => console.log(err))
 
     }
+    sendMoney()
 
-    const getcurrentuserLocation = () => {
-   
-                if (req.body.location === 'Ghana') {
-                    console.log('Ghanaian location')
-                    if (transaction_name == "litter_registrations") transaction_cost = 20.00
-                    if (transaction_name == 'dog_registrations') transaction_cost = 30.00
-                    if (transaction_name == 'adult_registrations') transaction_cost = 35.00
-                    if (transaction_name == 'Test') {
-                        transaction_cost = 0.50
-                        company_token = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3'
-                        service_type = "3854"
-                    }
-
-                    console.log('transactions cost', transaction_cost)      
-
-                }
-                else {
-                    console.log('non Ghanaian location')
-
-                    if (transaction_name == "litter_registrations") transaction_cost = 25.00
-                    if (transaction_name == 'dog_registrations') transaction_cost = 35.00
-                    if (transaction_name == 'adult_registrations') transaction_cost = 40.00
-                    if (transaction_name == 'Test') {
-                        transaction_cost = 0.50
-                        company_token = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3'
-                        service_type = "3854"
-                    }
-
-                    console.log('transactions cost', transaction_cost)
-
-
-                }
-
-                sendMoney()
-            
-
-
-    }
-
-    getcurrentuserLocation()
 
 }

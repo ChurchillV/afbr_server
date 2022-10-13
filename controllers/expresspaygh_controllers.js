@@ -1,7 +1,8 @@
 const axios = require('axios');
 const url = require('../weburl')['url']
 
-var merchant_id = "461826155167"
+// var merchant_id = "461826155167"
+var merchant_id  = '44619491949'
 var api_key = "7FdxlkOcWh16T0RDoajGL-xtPNm87sztz1H43troqY-jlXsSEpZcgHH1JQstlAx-H2LY442qj6Vqa1QShZZ"
 
 exports.postTransact = (req, res) =>

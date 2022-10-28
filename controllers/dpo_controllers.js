@@ -8,9 +8,9 @@ exports.postTransactDpo = (req, res) => {
     console.log(req.body)
     let transaction_name = req.body.transaction_name || 'dog_registrations'
     console.log(transaction_name)
-    let transaction_cost = 21.00
+    let transaction_cost = req.body.transaction_cost
     let RedirectURL = ''
-    let dog_name = 'African BullyStyles Eno'
+    let dog_name = req.body.dog_name
     let username = req.body.username || 'DEAR AFBR USER'
     let email = req.body.email 
     var company_token = "B069C2B2-B27D-42DE-B913-0B539235D0F6"
@@ -21,12 +21,11 @@ exports.postTransactDpo = (req, res) => {
    
 
     if (transaction_name == 'litter_registrations') {
-        RedirectURL = 'https://afbr-80930.web.app/litter_registrations_success'
+        RedirectURL = `https://africanbullyregistry.com/litter_registrations_success`
         console.log('litter registrations in gettransact url')
     }
     else {
-        RedirectURL = `https://afbr-80930.web.app/dog_registrations_success/${dog_name}/${username}/${email}/`
-        RedirectURL - 'https://afbr-80930.web.app/dog_registrations'
+        RedirectURL = `https://africanbullyregistry.com/dog_registrations_success/${dog_name}/${username}/${email}/`
         console.log('other registrations in gettransact url')
 
     }

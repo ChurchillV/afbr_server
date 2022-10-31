@@ -74,7 +74,7 @@ exports.postTransact = (req, res) =>
                     })
                     .then((resp) =>
                     {
-                        console.log(resp)
+                        // console.log(resp)
                         console.log('successfully updated dog token and order_id in database')
                         let checkout_link = `https://expresspaygh.com/api/checkout.php?token=${token}`
                         console.log(token)

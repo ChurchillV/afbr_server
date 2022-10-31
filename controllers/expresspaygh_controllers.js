@@ -2,8 +2,8 @@ const axios = require('axios');
 const url = require('../weburl')['url']
 
 // var merchant_id = "461826155167"
-var merchant_id  = '44619491949'
-var api_key = "7FdxlkOcWh16T0RDoajGL-xtPNm87sztz1H43troqY-jlXsSEpZcgHH1JQstlAx-H2LY442qj6Vqa1QShZZ"
+var merchant_id  = '558430842735'
+var api_key = "YE8Rco9WNnK6rJeb5tvSH-7QDq5z312OBE2OPI3OZj-eNvAPqQzOPclw6aDmhPH-n3FSNtStWZK1I4NsNqa"
 
 exports.postTransact = (req, res) =>
 {
@@ -56,7 +56,7 @@ exports.postTransact = (req, res) =>
 
         axios({
             method: 'post',
-            url: 'https://sandbox.expresspaygh.com/api/submit.php',
+            url: 'https://expresspaygh.com/api/submit.php',
 
             params: expressgh_data,
             headers: { "Content-Type": "multipart/form-data" }
@@ -74,8 +74,9 @@ exports.postTransact = (req, res) =>
                     })
                     .then((resp) =>
                     {
+                        console.log(resp)
                         console.log('successfully updated dog token and order_id in database')
-                        let checkout_link = `https://sandbox.expresspaygh.com/api/checkout.php?token=${token}`
+                        let checkout_link = `https://expresspaygh.com/api/checkout.php?token=${token}`
                         console.log(token)
                         console.log(checkout_link)
                         res.send(checkout_link)
@@ -107,7 +108,7 @@ exports.getTransactionStatus = (req, res) =>
     console.log(api_key)
     axios({
         method: 'post',
-        url: 'https://sandbox.expresspaygh.com/api/query.php',
+        url: 'https://expresspaygh.com/api/query.php',
 
         params: query_data,
         headers: { "Content-Type": "multipart/form-data" }

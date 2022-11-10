@@ -6,16 +6,23 @@ const axios = require('axios')
 const url2 = require('../weburl')
 const url = url2['url']
 
+const  {dog} = require('../models')
+const  {users}  = require('../models')
+
 exports.getAllUsers = (req, res) => {
 
-
-    let sql = 'SELECT * FROM users ORDER BY username';
-    let query = db.query(sql, (err, result, fields) => {
-        if (err) {
-            throw err;
-        }
-        res.send(result)
+    users.findAll({
+        order: [
+            ['username', 'ASC']
+        ]
     })
+    .then((users)=>{
+        res.send(users)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+    
 };
 
 exports.postCreateUser = (req, res) => {
@@ -85,20 +92,16 @@ exports.postCreateUser = (req, res) => {
 
 };
 
-
-
-
 exports.getOneUser = (req, res) => {
-    console.log(req.params.id)
-    let id = req.params.id
-    let sql = 'SELECT * FROM users WHERE id = ?';
-    let query = db.query(sql, id, (err, result, fields) => {
-        if (err) {
-            throw err;
-        }
-        res.send(result)
+    users.findByPk(req.params.id)
+    .then((users)=>{
+        res.send(users)
+    })
+    .catch((err)=>{
+        console.log(err)
     })
 }
+
 
 exports.getOneUserByEmailAndName = (req, res) => {
     let sql = 'SELECT * FROM users WHERE name = ?, email = ? ';

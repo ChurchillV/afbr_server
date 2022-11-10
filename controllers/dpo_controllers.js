@@ -8,7 +8,7 @@ exports.postTransactDpo = (req, res) => {
     console.log(req.body)
     let transaction_name = req.body.transaction_name || 'dog_registrations'
     console.log(transaction_name)
-    let transaction_cost = req.body.transaction_cost
+    let transaction_cost = 21.00
     let RedirectURL = ''
     let dog_name = req.body.dog_name
     let username = req.body.username || 'DEAR AFBR USER'
@@ -17,8 +17,6 @@ exports.postTransactDpo = (req, res) => {
     var service_type = "51851"
 
     console.log(dog_name, username)
-
-   
 
     if (transaction_name == 'litter_registrations') {
         RedirectURL = `https://africanbullyregistry.com/litter_registrations_success`

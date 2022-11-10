@@ -1,11 +1,5 @@
 
 
-const Dogs = require('../models/afbr');
-const db = require('../config/db')
-
-
-
-
 exports.postImage = (req, res) => {
 
     console.log('image successfully uploaded')

@@ -1,1 +1,0 @@
-// check if emaill sends to user when he or she registers

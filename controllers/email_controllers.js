@@ -1,6 +1,5 @@
 // controler/todo.js
 
-const Dogs = require('../models/afbr');
 const db = require('../config/db')
 var nodemailer = require('nodemailer')
 const dotenv = require('dotenv')

@@ -13,7 +13,7 @@ router.post('/', postCreateUser)
 
 router.get('/', getAllUsers)
 
-router.get('/getone', getOneUser)
+router.get('/getone/:id', getOneUser)
 
 router.get('/getoneuserbyemailandname', getOneUserByEmailAndName)
 

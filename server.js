@@ -13,6 +13,7 @@ const db = require('./config/db');
 const picture_routes = require('./router/picture_routes')
 const email_routes = require('./router/email_routes')
 const expresspaygh_routes = require('./router/expresspaygh_routes')
+const post_routes  = require('./router/post_routes')
 
 var nodemailer = require('nodemailer')
 var mysqlApostrophe = require("mysql-apostrophe")
@@ -31,6 +32,8 @@ app.use('/', db_routes)
 app.use('/api/users', user_routes)
 app.use('/api/expresspaygh', expresspaygh_routes)
 app.use('/api/email', email_routes)
+app.use('/api/posts', post_routes )
+
 const PORT = process.env.PORT || 8000;
 
 

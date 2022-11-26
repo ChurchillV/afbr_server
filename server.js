@@ -17,7 +17,8 @@ const post_routes  = require('./router/post_routes')
 
 var nodemailer = require('nodemailer')
 var mysqlApostrophe = require("mysql-apostrophe")
-var bodyParser = require("body-parser")
+var bodyParser = require("body-parser");
+const { createPost } = require("./controllers/post.controllers");
 
 app.use(express.json({ extended: false }));
 app.use(cors({ origin: true, credentials: true }))
@@ -34,16 +35,17 @@ app.use('/api/expresspaygh', expresspaygh_routes)
 app.use('/api/email', email_routes)
 app.use('/api/posts', post_routes )
 
+
 const PORT = process.env.PORT || 8000;
 
 
-app.get('/', (req, res) => res.send('Server up and running'));
+app.get('', (req, res) => res.send('Server up and running'));
 
 
 
 models.sequelize.sync().then((req)=> {
     app.listen(PORT, () => {
-        console.log(`server i s running on http://localhost:${PORT}`)
+        console.log(`server is running on http://localhost:${PORT}`)
     });
 })
 

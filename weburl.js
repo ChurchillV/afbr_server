@@ -1,3 +1,3 @@
-exports.url = 'https://afbrserver.herokuapp.com/'
+//exports.url = 'https://afbrserver.herokuapp.com/'
 
-// exports.url = 'http://localhost:8000/'
+exports.url = 'http://localhost:8000/'

@@ -20,5 +20,7 @@ exports.getAllPosts = (req, res) => {
             })
     
     
-    
+        
 }
+
+

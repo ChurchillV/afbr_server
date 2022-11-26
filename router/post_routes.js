@@ -6,4 +6,7 @@ const { getAllPosts } = require('../controllers/post.controllers')
 router.get('', getAllPosts)
 
 
+
+
+
 module.exports = router;

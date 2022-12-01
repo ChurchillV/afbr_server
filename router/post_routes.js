@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllPosts, createPost, deletePost, updatePost, getOnePost } = require('../controllers/post.controllers')
+const { getAllPosts, createPost, deletePost, updatePost, getOnePost, likeAPost } = require('../controllers/post.controllers')
 
 //Get all Posts
 router.get('/', getAllPosts)
 //Get one post
 router.get('/:id', getOnePost)
+
+router.post('/like/:id', likeAPost)
 //Create a new post
 router.post('/', createPost)
 

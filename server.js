@@ -14,6 +14,7 @@ const picture_routes = require('./router/picture_routes')
 const email_routes = require('./router/email_routes')
 const expresspaygh_routes = require('./router/expresspaygh_routes')
 const post_routes  = require('./router/post_routes')
+const comments_routes = require('./router/comments_routes')
 
 var nodemailer = require('nodemailer')
 var mysqlApostrophe = require("mysql-apostrophe")
@@ -27,13 +28,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(mysqlApostrophe);
 
 
-
+//Routes for handling specific requests
 app.use("/api/dogs", afbr);
 app.use('/', db_routes)
 app.use('/api/users', user_routes)
 app.use('/api/expresspaygh', expresspaygh_routes)
 app.use('/api/email', email_routes)
 app.use('/api/posts', post_routes )
+app.use('/api/comments', comments_routes)
 
 
 const PORT = process.env.PORT || 8000;
@@ -48,6 +50,5 @@ models.sequelize.sync().then((req)=> {
         console.log(`server is running on http://localhost:${PORT}`)
     });
 })
-
 
 module.exports = app;

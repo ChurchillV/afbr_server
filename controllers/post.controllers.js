@@ -4,14 +4,11 @@ const axios = require('axios')
 const url2 = require('../weburl')
 const url = url2['url']
 const express = require('express')
-const app = express()
-const router = express.Router()
-const multer = require('multer')
 
 const  {dog} = require('../models')
 const  {users}  = require('../models')
 const {posts} = require('../models')
-const { post, data } = require('jquery')
+
 
 exports.getAllPosts = (req, res) => {
         posts.findAll()
@@ -71,12 +68,10 @@ exports.deletePost = (req, res) => {
     posts.destroy({
         where: {id : id}
     })
-        .then(num => {
-            if (num == 1) {
+        .then(data => {
                 res.send({
                     message: "Post was deleted successfully"
                 });
-            }
         })
         .catch(err => console.log(err))
 }
@@ -89,8 +84,8 @@ exports.updatePost = (req,res) => {
     posts.update(req.body, {
         where: {id: id}
     })
-        .then(num => {
-            if (num => 1) {
+        .then(data => {
+            if (data) {
                 res.send({
                     message: "Post was updated successfully"
                 });

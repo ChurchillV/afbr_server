@@ -9,12 +9,22 @@ const { getAllDogs, postCreateDog,
 
 const {
     getPedigree
-} = require('../controllers/dog.controllers2.js')
+} = require('../controllers/dog.controllers2.js');
+const { getNewlyRegisteredDogs } = require('../controllers/dog.controllers3');
+
+
 router.get("/", getAllDogs)
 
 router.get("/getdoguser/:id", getAllDogsByUser)
 
+router.get('/:id', getOneDog)
 
+router.get('/s2/newly_registered_dogs', getNewlyRegisteredDogs )
+
+
+router.get('/search/:search_input', getSearch)
+
+router.get('/pedigree/:id', getPedigree)
 
 
 
@@ -24,12 +34,7 @@ router.post('/has_paid', setHasBeenPaidFor)
 
 router.post('/set_token_and_order_id', setTokenAndOrderId)
 
-router.get('/:id', getOneDog)
 
-
-router.get('/search/:search_input', getSearch)
-
-router.get('/pedigree/:id', getPedigree)
 
 router.put('/:id', putUpdateDog);
 

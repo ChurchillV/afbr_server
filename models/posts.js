@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     likes: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
     }
   }, {
     sequelize,

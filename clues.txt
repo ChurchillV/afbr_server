@@ -1,0 +1,3 @@
+sequelize-auto -h z3iruaadbwo0iyfp.cbetxkdyhwsb.us-east-1.rds.amazonaws.com -d jwjgkj993t2yf6sa -u ks8pa75ol3h0skzv -x el5w7f3rjcbisebg -p 3306  --dialect mysql
+ -c [/path/to/config] -o [/path/to/models]
+
